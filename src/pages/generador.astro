@@ -87,28 +87,26 @@ const grados = [
 
 <style>
   .gen-hero {
-    background:
-      radial-gradient(circle at 85% 10%, rgba(193, 154, 75, 0.18), transparent 40%),
-      linear-gradient(155deg, #10203a 0%, #14243f 55%, #1d3255 100%);
-    color: #fff;
-    padding-block: 3.5rem;
-    border-bottom: 3px solid var(--gold);
+    background: #fff;
+    color: var(--ink);
+    padding-block: 3.25rem 2.75rem;
+    border-bottom: 1px solid var(--line);
   }
   .gen-hero .page-eyebrow {
     font-size: 0.8rem;
     letter-spacing: 0.26em;
     text-transform: uppercase;
-    color: var(--gold-light);
-    font-weight: 600;
+    color: var(--gold-deep);
+    font-weight: 700;
     margin: 0 0 0.9rem;
   }
   .gen-hero h1 {
-    color: #fff;
+    color: var(--navy);
     font-size: clamp(2rem, 5vw, 3rem);
     margin: 0;
   }
   .gen-hero .page-sub {
-    color: #cdd6e4;
+    color: var(--muted);
     font-size: 1.12rem;
     max-width: 46rem;
     margin: 1.1rem 0 0;
@@ -468,43 +466,42 @@ const grados = [
   }
 
   function drawMonogram(cx: number, cy: number, r: number) {
+    // cream medallion with gold rings
     ctx.beginPath();
     ctx.arc(cx, cy, r, 0, Math.PI * 2);
-    ctx.fillStyle = NAVY;
+    ctx.fillStyle = '#f7f2e6';
     ctx.fill();
-    ctx.lineWidth = r * 0.07;
-    ctx.strokeStyle = GOLDL;
+    ctx.lineWidth = r * 0.08;
+    ctx.strokeStyle = GOLD;
+    ctx.stroke();
+    ctx.lineWidth = r * 0.03;
+    ctx.strokeStyle = GOLD_D;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r * 0.84, 0, Math.PI * 2);
     ctx.stroke();
 
-    const s = (2 * r) / 100;
-    const ox = cx - r;
-    const oy = cy - r;
-    const P = (x: number, y: number): [number, number] => [ox + x * s, oy + y * s];
+    // TU letterforms (native box 100 x 108), scaled and centered
+    const sc = (1.24 * r) / 100;
+    const ox = cx - (100 * sc) / 2;
+    const oy = cy - (108 * sc) / 2;
+    const R = (x: number, y: number, w: number, h: number) =>
+      ctx.fillRect(ox + x * sc, oy + y * sc, w * sc, h * sc);
 
-    // U (gold)
-    ctx.fillStyle = GOLDL;
-    ctx.beginPath();
-    let p = P(26, 34); ctx.moveTo(p[0], p[1]);
-    p = P(40, 34); ctx.lineTo(p[0], p[1]);
-    p = P(40, 58); ctx.lineTo(p[0], p[1]);
-    let c = P(40, 64), e = P(46, 64); ctx.quadraticCurveTo(c[0], c[1], e[0], e[1]);
-    p = P(54, 64); ctx.lineTo(p[0], p[1]);
-    c = P(60, 64); e = P(60, 58); ctx.quadraticCurveTo(c[0], c[1], e[0], e[1]);
-    p = P(60, 34); ctx.lineTo(p[0], p[1]);
-    p = P(74, 34); ctx.lineTo(p[0], p[1]);
-    p = P(74, 59); ctx.lineTo(p[0], p[1]);
-    c = P(74, 78); e = P(55, 78); ctx.quadraticCurveTo(c[0], c[1], e[0], e[1]);
-    p = P(45, 78); ctx.lineTo(p[0], p[1]);
-    c = P(26, 78); e = P(26, 59); ctx.quadraticCurveTo(c[0], c[1], e[0], e[1]);
-    ctx.closePath();
-    ctx.fill();
+    // U (navy)
+    ctx.fillStyle = NAVY;
+    R(0, 34, 33, 9);
+    R(67, 34, 33, 9);
+    R(2, 34, 27, 68);
+    R(71, 34, 27, 68);
+    R(2, 79, 96, 23);
 
-    // T (white)
-    ctx.fillStyle = '#fff';
-    let a = P(30, 20), b = P(70, 31);
-    ctx.fillRect(a[0], a[1], b[0] - a[0], b[1] - a[1]);
-    a = P(44.5, 20); b = P(55.5, 54);
-    ctx.fillRect(a[0], a[1], b[0] - a[0], b[1] - a[1]);
+    // T (gold)
+    ctx.fillStyle = GOLD;
+    R(8, 3, 84, 17);
+    R(8, 20, 9, 6);
+    R(83, 20, 9, 6);
+    R(38, 20, 24, 55);
+    R(33, 64, 34, 11);
   }
 
   function drawBanner(cx: number, cy: number, w: number, text: string) {

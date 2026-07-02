@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Monogram from '../components/Monogram.astro';
 
 const stats = [
   { n: '1', label: 'Fuente de la verdad', sub: 'Wikipedia' },
@@ -30,7 +29,7 @@ const featured = [
   <section class="hero">
     <div class="hero-overlay"></div>
     <div class="wrap hero-content">
-      <Monogram size={78} class="hero-crest" />
+      <img src="/img/logo.png" alt="Escudo de Tolosa University" class="hero-crest" width="257" height="230" fetchpriority="high" />
       <p class="hero-eyebrow">In Wikipedia Veritas · Est. Pre-AI</p>
       <h1>La escuela de la <span class="hl">omnisciencia</span> anterior a la IA</h1>
       <p class="hero-sub">
@@ -40,7 +39,7 @@ const featured = [
       </p>
       <div class="hero-cta">
         <a href="/admisiones/" class="btn btn-primary">Solicitar plaza</a>
-        <a href="/grados/" class="btn btn-ghost">Ver grados</a>
+        <a href="/grados/" class="btn btn-outline">Ver grados</a>
       </div>
     </div>
     <div class="hero-marquee" aria-hidden="true">
@@ -184,19 +183,18 @@ const featured = [
   .hero {
     position: relative;
     background:
-      radial-gradient(circle at 20% 20%, rgba(193, 154, 75, 0.16), transparent 45%),
-      linear-gradient(160deg, #10203a 0%, #14243f 45%, #1d3255 100%);
-    color: #fff;
+      radial-gradient(circle at 50% -10%, #ffffff 0%, var(--paper) 55%, #f0e8d4 100%);
+    color: var(--ink);
     overflow: hidden;
-    padding-block: 5.5rem 0;
+    padding-block: 3.5rem 0;
   }
 
   .hero-overlay {
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(20, 36, 63, 0.045) 1px, transparent 1px);
     background-size: 26px 26px;
-    opacity: 0.6;
+    opacity: 0.8;
     pointer-events: none;
   }
 
@@ -204,37 +202,39 @@ const featured = [
     position: relative;
     text-align: center;
     max-width: 52rem;
-    padding-bottom: 4.5rem;
+    padding-bottom: 3.5rem;
   }
 
   .hero-crest {
-    margin-bottom: 1.5rem;
-    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.35));
+    height: 150px;
+    width: auto;
+    margin: 0 auto 1.2rem;
+    filter: drop-shadow(0 8px 18px rgba(20, 36, 63, 0.18));
   }
 
   .hero-eyebrow {
     font-size: 0.82rem;
     letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: var(--gold-light);
+    color: var(--gold-deep);
     margin: 0 0 1.2rem;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .hero h1 {
-    color: #fff;
+    color: var(--navy);
     font-size: clamp(2.3rem, 6vw, 4rem);
     margin: 0 0 1.4rem;
     line-height: 1.08;
   }
   .hero .hl {
-    color: var(--gold-light);
+    color: var(--gold-deep);
     font-style: italic;
   }
 
   .hero-sub {
     font-size: 1.2rem;
-    color: #cdd6e4;
+    color: var(--muted);
     max-width: 40rem;
     margin: 0 auto 2rem;
   }
@@ -252,7 +252,8 @@ const featured = [
     gap: 1.5rem;
     align-items: center;
     white-space: nowrap;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    background: var(--navy);
+    border-top: 3px solid var(--gold);
     border-bottom: 3px solid var(--gold);
     padding: 0.9rem 0;
     font-family: var(--font-slab);
