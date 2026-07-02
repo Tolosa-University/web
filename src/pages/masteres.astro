@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
+import DegreeCard from '../components/DegreeCard.astro';
+import { masteres as masters } from '../data/oferta';
 
 const asignaturas = [
   { name: '«Yo lo que creo es que…»: Introducción al Opinar', ects: '12 ECTS' },
@@ -11,51 +13,6 @@ const asignaturas = [
   { name: 'Gestualidad de Plató: la ceja, el bolígrafo y el «déjame terminar»', ects: '6 ECTS' },
   { name: 'Geopolítica Exprés: opinar de siete conflictos con un solo mapa mental', ects: '6 ECTS' },
   { name: 'TFM: opinar del TFM de un compañero sin haberlo leído', ects: '6 ECTS' },
-];
-
-const masters = [
-  {
-    name: 'Máster en Saberlo Todo (habilitante)',
-    tag: 'Facultad de Saberes Humanos',
-    duration: '2 años',
-    desc: 'El posgrado clásico de la casa. Habilita legalmente para empezar frases con «pues te lo explico» en cualquier país del espacio Schengen.',
-    salidas: 'Enciclopedia andante · Comodín de la llamada · Jefe de estudios',
-  },
-  {
-    name: 'Máster en Divulgación sin Exagerar',
-    tag: 'Facultad de Elocuencia',
-    duration: '1 año',
-    desc: 'Contar la ciencia sin decir que «los científicos están aterrados». Incluye seminario intensivo de titulares que no traicionan al estudio que citan.',
-    salidas: 'Divulgador honesto · Redactor científico · Rareza de internet',
-  },
-  {
-    name: 'Máster en Fuentes Primarias y Notas al Pie',
-    tag: 'Facultad de Documentación',
-    duration: '2 años',
-    desc: 'Para quienes leen la bibliografía por placer. Se sale sabiendo distinguir un «según un estudio» de un estudio de verdad, con nota al pie incluida.',
-    salidas: 'Verificador de datos · Editor académico · Azote de bulos',
-  },
-  {
-    name: 'Máster en Corrección de Desconocidos («Actually…»)',
-    tag: 'Facultad de Elocuencia',
-    duration: '1 año',
-    desc: 'Sí, hay que corregir el dato. No, no hace falta arruinar la cena. Aprende a puntualizar con elegancia y a retirarte a tiempo de un hilo perdido.',
-    salidas: 'Moderador de foros · Diplomático de sobremesa · Exdiscutidor de internet',
-  },
-  {
-    name: 'Máster en Silencio Estratégico',
-    tag: 'Facultad de la Mente',
-    duration: '1 año',
-    desc: 'El posgrado más difícil de aprobar: no opinar cuando no se sabe. Tasa de abandono del 94%, casi siempre en la primera sobremesa con familia.',
-    salidas: 'Sabio discreto · Asesor de confianza · Persona que cae bien',
-  },
-  {
-    name: 'Máster en Predicción Retrospectiva',
-    tag: 'Facultad de Números',
-    duration: '1 año',
-    desc: 'Formación avanzada en «yo ya lo dije» y «esto se veía venir». Único programa donde los exámenes se corrigen después de saber las respuestas.',
-    salidas: 'Analista de mercados · Comentarista deportivo del lunes · Historiador de barra',
-  },
 ];
 
 const masteresSchema = {
@@ -171,15 +128,7 @@ const masteresSchema = {
       </div>
       <div class="grid grid-2">
         {masters.map((m) => (
-          <article class="degree">
-            <div class="degree-head">
-              <span class="degree-tag">{m.tag}</span>
-              <span class="degree-dur">{m.duration}</span>
-            </div>
-            <h3>{m.name}</h3>
-            <p>{m.desc}</p>
-            <p class="degree-salidas"><strong>Salidas:</strong> {m.salidas}</p>
-          </article>
+          <DegreeCard {...m} />
         ))}
       </div>
     </div>
@@ -289,57 +238,6 @@ const masteresSchema = {
     margin: 0.25rem 0 0;
     font-size: 0.93rem;
     color: #c3ccdb;
-  }
-
-  .degree {
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 1.9rem;
-    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-  }
-  .degree:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 36px rgba(20, 36, 63, 0.1);
-    border-color: var(--gold);
-  }
-  .degree-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 0.8rem;
-  }
-  .degree-tag {
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 700;
-    color: var(--gold-deep);
-  }
-  .degree-dur {
-    font-size: 0.8rem;
-    color: var(--muted);
-    background: var(--cream);
-    padding: 0.15rem 0.6rem;
-    border-radius: 20px;
-    white-space: nowrap;
-  }
-  .degree h3 {
-    margin: 0 0 0.7rem;
-    font-size: 1.3rem;
-  }
-  .degree p {
-    color: var(--muted);
-    margin: 0 0 0.9rem;
-  }
-  .degree-salidas {
-    font-size: 0.9rem;
-    padding-top: 0.7rem;
-    border-top: 1px dashed var(--line);
-  }
-  .degree-salidas strong {
-    color: var(--navy);
   }
 
   .callout .lead {

@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import CookieConsent from '../components/CookieConsent.astro';
 import '../styles/fonts.css';
 
 interface Props {
@@ -122,17 +123,26 @@ const jsonLdBlocks = [organizationLd, webSiteLd, breadcrumbLd, ...extraSchemas].
     <slot name="head" />
 
     {jsonLdBlocks.map((block) => (
-      <script type="application/ld+json" set:html={JSON.stringify(block)} />
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(block)} />
     ))}
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-94C41XE0MN"></script>
+    <!-- Google tag (gtag.js) con Consent Mode v2: todo denegado por defecto.
+         Solo se activa analytics_storage si el usuario acepta en el banner
+         (CookieConsent.astro). El default debe declararse ANTES de cargar gtag.js. -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500,
+      });
       gtag('js', new Date());
       gtag('config', 'G-94C41XE0MN');
     </script>
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-94C41XE0MN"></script>
   </head>
   <body>
     <a href="#main" class="skip-link">Saltar al contenido</a>
@@ -141,6 +151,7 @@ const jsonLdBlocks = [organizationLd, webSiteLd, breadcrumbLd, ...extraSchemas].
       <slot />
     </main>
     <Footer />
+    <CookieConsent />
   </body>
 </html>
 

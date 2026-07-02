@@ -1,0 +1,143 @@
+---
+// Banner de consentimiento para Google Analytics (Consent Mode v2).
+// El consentimiento por defecto es «denied» (ver Layout.astro); aquí solo
+// se muestra el aviso y se actualiza la elección del usuario.
+---
+
+<div class="cookie-banner" id="cookie-banner" role="region" aria-label="Aviso de cookies" hidden>
+  <div class="cookie-inner">
+    <p class="cookie-text">
+      Usamos cookies de <strong>Google Analytics</strong> para saber qué páginas interesan más.
+      Nada de publicidad: pura curiosidad estadística, muy de la casa. Puedes cambiar de opinión
+      cuando quieras desde «Preferencias de cookies», en el pie de página.
+    </p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" class="cookie-btn cookie-accept">Aceptar</button>
+      <button type="button" id="cookie-reject" class="cookie-btn cookie-reject">Rechazar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const KEY = 'tu-cookie-consent';
+  const banner = document.getElementById('cookie-banner') as HTMLElement;
+  const accept = document.getElementById('cookie-accept') as HTMLButtonElement;
+  const reject = document.getElementById('cookie-reject') as HTMLButtonElement;
+
+  const gtag = (window as any).gtag as (...args: unknown[]) => void;
+
+  function applyConsent(granted: boolean) {
+    gtag('consent', 'update', {
+      analytics_storage: granted ? 'granted' : 'denied',
+    });
+  }
+
+  function choose(value: 'granted' | 'denied') {
+    try {
+      localStorage.setItem(KEY, value);
+    } catch {
+      /* modo privado sin storage: la elección vale para esta página */
+    }
+    applyConsent(value === 'granted');
+    banner.hidden = true;
+  }
+
+  accept.addEventListener('click', () => choose('granted'));
+  reject.addEventListener('click', () => choose('denied'));
+
+  let stored: string | null = null;
+  try {
+    stored = localStorage.getItem(KEY);
+  } catch {
+    /* sin storage tratamos como primera visita */
+  }
+  if (stored === 'granted') {
+    applyConsent(true);
+  } else if (stored !== 'denied') {
+    banner.hidden = false;
+  }
+
+  // Reabrir desde cualquier enlace/botón con data-consent-open (pie de página).
+  document.addEventListener('click', (e) => {
+    if ((e.target as Element).closest('[data-consent-open]')) {
+      banner.hidden = false;
+      accept.focus();
+    }
+  });
+</script>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    inset: auto 1rem 1rem 1rem;
+    z-index: 90;
+    display: flex;
+    justify-content: center;
+  }
+  .cookie-inner {
+    max-width: 46rem;
+    background: var(--navy);
+    color: #dfe4ee;
+    border: 1px solid var(--gold);
+    border-radius: 12px;
+    padding: 1.2rem 1.4rem;
+    box-shadow: 0 18px 44px rgba(9, 16, 30, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+  }
+  .cookie-text {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    flex: 1 1 22rem;
+  }
+  .cookie-text strong {
+    color: #fff;
+  }
+  .cookie-actions {
+    display: flex;
+    gap: 0.7rem;
+    flex: 0 0 auto;
+  }
+  .cookie-btn {
+    font: inherit;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.55rem 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .cookie-accept {
+    background: var(--gold);
+    color: var(--navy);
+    border: 2px solid var(--gold);
+  }
+  .cookie-accept:hover {
+    background: var(--gold-light);
+    border-color: var(--gold-light);
+  }
+  .cookie-reject {
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+  }
+  .cookie-reject:hover {
+    border-color: var(--gold);
+    color: var(--gold-light);
+  }
+
+  @media (max-width: 620px) {
+    .cookie-banner {
+      inset: auto 0.6rem 0.6rem 0.6rem;
+    }
+    .cookie-actions {
+      width: 100%;
+    }
+    .cookie-btn {
+      flex: 1;
+    }
+  }
+</style>

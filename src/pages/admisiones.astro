@@ -1,6 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
+import { grados } from '../data/oferta';
+
+// En el select basta el nombre corto, sin el «Grado en» delante.
+const opcionesGrado = grados.map((g) => g.name.replace(/^Grado en /, ''));
 
 const pasos = [
   { n: '1', title: 'Solicitud', text: 'Rellena el formulario. A mano, si te apetece, aunque aceptamos teclado.' },
@@ -110,14 +114,7 @@ const calendario = [
           <label>
             Grado de interés
             <select name="grado">
-              <option>Cultura General Aplicada</option>
-              <option>Consulta Enciclopédica</option>
-              <option>Cálculo Mental Clásico</option>
-              <option>Orientación sin GPS</option>
-              <option>Retórica y Debate de Sobremesa</option>
-              <option>Memoria Prodigiosa</option>
-              <option>Historia Contada de Memoria</option>
-              <option>Bricolaje del Conocimiento</option>
+              {opcionesGrado.map((o) => <option>{o}</option>)}
               <option>Aún no lo sé (¡nos encanta!)</option>
             </select>
           </label>

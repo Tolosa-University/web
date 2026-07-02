@@ -1,7 +1,8 @@
 ---
 import Monogram from './Monogram.astro';
 
-const year = 2026;
+// Año de build: la web se recompila con cada push, así que no se queda atrás.
+const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
@@ -47,6 +48,7 @@ const year = 2026;
 
   <div class="legal">
     <p>© {year} Tolosa University · Est. Pre-AI. Todos los conocimientos reservados.</p>
+    <button type="button" class="cookie-prefs" data-consent-open>Preferencias de cookies</button>
     <p class="wink">Verificado a mano, sin ayuda de máquinas.</p>
   </div>
 </footer>
@@ -145,6 +147,19 @@ const year = 2026;
 
   .wink {
     font-style: italic;
+  }
+
+  .cookie-prefs {
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    color: #9aa4b5;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .cookie-prefs:hover {
+    color: #fff;
   }
 
   @media (max-width: 860px) {

@@ -1,19 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { titulosDiploma } from '../data/oferta';
 import '../styles/fonts-diploma.css';
-
-const grados = [
-  'Grado en Cultura General Aplicada',
-  'Grado en Consulta Enciclopédica',
-  'Grado en Cálculo Mental Clásico',
-  'Grado en Orientación sin GPS',
-  'Grado en Retórica y Debate de Sobremesa',
-  'Grado en Memoria Prodigiosa',
-  'Grado en Historia Contada de Memoria',
-  'Grado en Bricolaje del Conocimiento',
-  'Máster en Saberlo Todo',
-  'Doctorado Honoris Causa en Sabiduría General',
-];
 
 const generadorSchema = {
   '@context': 'https://schema.org',
@@ -48,7 +36,7 @@ const generadorSchema = {
   <section class="section">
     <div class="wrap gen-grid">
       <!-- FORM -->
-      <form class="gen-form" id="gen-form" autocomplete="off">
+      <form class="gen-form" id="gen-form" autocomplete="off" onsubmit="return false;">
         <div class="field">
           <label for="f-name">Nombre completo</label>
           <input type="text" id="f-name" maxlength="48" placeholder="Ej. María de los Saberes Etxeberria" value="María de los Saberes Etxeberria" />
@@ -58,7 +46,7 @@ const generadorSchema = {
           <label for="f-grade">Título o grado</label>
           <input type="text" id="f-grade" list="grados" maxlength="70" placeholder="Ej. Grado en Cultura General Aplicada" value="Grado en Cultura General Aplicada" />
           <datalist id="grados">
-            {grados.map((g) => <option value={g} />)}
+            {titulosDiploma.map((g) => <option value={g} />)}
           </datalist>
         </div>
 
@@ -220,6 +208,8 @@ const generadorSchema = {
 </style>
 
 <script>
+  import { titulosDiploma as GRADOS } from '../data/oferta';
+
   const canvas = document.getElementById('diploma') as HTMLCanvasElement;
   const ctx = canvas.getContext('2d')!;
 
@@ -246,18 +236,6 @@ const generadorSchema = {
     'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre',
   ];
 
-  const GRADOS = [
-    'Grado en Cultura General Aplicada',
-    'Grado en Consulta Enciclopédica',
-    'Grado en Cálculo Mental Clásico',
-    'Grado en Orientación sin GPS',
-    'Grado en Retórica y Debate de Sobremesa',
-    'Grado en Memoria Prodigiosa',
-    'Grado en Historia Contada de Memoria',
-    'Grado en Bricolaje del Conocimiento',
-    'Máster en Saberlo Todo',
-    'Doctorado Honoris Causa en Sabiduría General',
-  ];
   const NOMBRES = [
     'Iñaki del Conocimiento Agirre',
     'Amaia Todolosabe Urrutia',

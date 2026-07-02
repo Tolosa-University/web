@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import crest from '../assets/logo.png';
 
 const stats = [
   { n: '1', label: 'Fuente de la verdad', sub: 'Wikipedia' },
@@ -29,7 +31,7 @@ const featured = [
   <section class="hero">
     <div class="hero-overlay"></div>
     <div class="wrap hero-content">
-      <img src="/img/logo.png" alt="Escudo de Tolosa University" class="hero-crest" width="257" height="230" fetchpriority="high" />
+      <Image src={crest} alt="Escudo de Tolosa University" class="hero-crest" format="webp" quality={90} loading="eager" fetchpriority="high" />
       <p class="hero-eyebrow">In Wikipedia Veritas · Est. Pre-AI</p>
       <h1>La escuela de la <span class="hl">omnisciencia</span> anterior a la IA</h1>
       <p class="hero-sub">

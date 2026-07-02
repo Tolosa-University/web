@@ -30,12 +30,11 @@ const isActive = (href: string) => {
       </span>
     </a>
 
-    <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden />
-    <label for="nav-toggle" class="burger" aria-label="Abrir menú">
+    <button type="button" id="nav-toggle" class="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="site-nav">
       <span></span><span></span><span></span>
-    </label>
+    </button>
 
-    <nav class="nav" aria-label="Principal">
+    <nav class="nav" id="site-nav" aria-label="Principal">
       {nav.map((item) => (
         <a href={item.href} class:list={['nav-link', { active: isActive(item.href) }]}>
           {item.label}
@@ -45,6 +44,16 @@ const isActive = (href: string) => {
     </nav>
   </div>
 </header>
+
+<script>
+  const toggle = document.getElementById('nav-toggle') as HTMLButtonElement;
+  const header = toggle.closest('.site-header') as HTMLElement;
+  toggle.addEventListener('click', () => {
+    const open = header.classList.toggle('nav-open');
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+  });
+</script>
 
 <style>
   .site-header {
@@ -151,16 +160,14 @@ const isActive = (href: string) => {
     transform: translateY(-1px);
   }
 
-  .nav-toggle,
   .burger {
     display: none;
-  }
-
-  .burger {
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
     padding: 0.4rem;
+    background: none;
+    border: 0;
   }
 
   .burger span {
@@ -189,11 +196,14 @@ const isActive = (href: string) => {
       padding: 0.5rem 1.25rem 1.25rem;
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.28s ease;
+      /* visibility saca los enlaces del orden de tabulación mientras el menú está cerrado */
+      visibility: hidden;
+      transition: max-height 0.28s ease, visibility 0.28s;
     }
 
-    .nav-toggle:checked ~ .nav {
+    .site-header.nav-open .nav {
       max-height: 30rem;
+      visibility: visible;
     }
 
     .nav-link {
@@ -206,13 +216,13 @@ const isActive = (href: string) => {
       text-align: center;
     }
 
-    .nav-toggle:checked ~ .burger span:nth-child(1) {
+    .site-header.nav-open .burger span:nth-child(1) {
       transform: translateY(7px) rotate(45deg);
     }
-    .nav-toggle:checked ~ .burger span:nth-child(2) {
+    .site-header.nav-open .burger span:nth-child(2) {
       opacity: 0;
     }
-    .nav-toggle:checked ~ .burger span:nth-child(3) {
+    .site-header.nav-open .burger span:nth-child(3) {
       transform: translateY(-7px) rotate(-45deg);
     }
   }
