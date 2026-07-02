@@ -42,12 +42,6 @@ const featured = [
         <a href="/grados/" class="btn btn-outline">Ver grados</a>
       </div>
     </div>
-    <div class="hero-marquee" aria-hidden="true">
-      <span>Saber es poder</span><span>·</span><span>Wikipedia es verdad</span><span>·</span>
-      <span>Cero prompts</span><span>·</span><span>Cien por cien humano</span><span>·</span>
-      <span>Saber es poder</span><span>·</span><span>Wikipedia es verdad</span><span>·</span>
-      <span>Cero prompts</span><span>·</span><span>Cien por cien humano</span><span>·</span>
-    </div>
   </section>
 
   <!-- STATS -->
@@ -183,18 +177,20 @@ const featured = [
   .hero {
     position: relative;
     background:
-      radial-gradient(circle at 50% -10%, #ffffff 0%, var(--paper) 55%, #f0e8d4 100%);
-    color: var(--ink);
+      radial-gradient(circle at 20% 20%, rgba(193, 154, 75, 0.16), transparent 45%),
+      linear-gradient(160deg, #10203a 0%, #14243f 45%, #1d3255 100%);
+    color: #fff;
     overflow: hidden;
     padding-block: 3.5rem 0;
+    border-bottom: 3px solid var(--gold);
   }
 
   .hero-overlay {
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(rgba(20, 36, 63, 0.045) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
     background-size: 26px 26px;
-    opacity: 0.8;
+    opacity: 0.6;
     pointer-events: none;
   }
 
@@ -209,32 +205,32 @@ const featured = [
     height: 150px;
     width: auto;
     margin: 0 auto 1.2rem;
-    filter: drop-shadow(0 8px 18px rgba(20, 36, 63, 0.18));
+    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.35));
   }
 
   .hero-eyebrow {
     font-size: 0.82rem;
     letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: var(--gold-deep);
+    color: var(--gold-light);
     margin: 0 0 1.2rem;
     font-weight: 700;
   }
 
   .hero h1 {
-    color: var(--navy);
+    color: #fff;
     font-size: clamp(2.3rem, 6vw, 4rem);
     margin: 0 0 1.4rem;
     line-height: 1.08;
   }
   .hero .hl {
-    color: var(--gold-deep);
+    color: var(--gold-light);
     font-style: italic;
   }
 
   .hero-sub {
     font-size: 1.2rem;
-    color: var(--muted);
+    color: #cdd6e4;
     max-width: 40rem;
     margin: 0 auto 2rem;
   }
@@ -244,28 +240,6 @@ const featured = [
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
-  }
-
-  .hero-marquee {
-    position: relative;
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-    white-space: nowrap;
-    background: var(--navy);
-    border-top: 3px solid var(--gold);
-    border-bottom: 3px solid var(--gold);
-    padding: 0.9rem 0;
-    font-family: var(--font-slab);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-size: 0.85rem;
-    color: var(--gold-light);
-    animation: scroll 26s linear infinite;
-  }
-  @keyframes scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
   }
 
   /* STATS */
