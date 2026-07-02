@@ -6,26 +6,39 @@ interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
+  ogImageAlt?: string;
+  noindex?: boolean;
+  /** JSON-LD adicional específico de la página (Course, ItemList, etc.). */
+  schema?: object | object[];
 }
 
 const {
   title = 'Tolosa University — La universidad de los que to’ lo saben',
   description = 'Tolosa University, la School of Pre-AI Omniscience. Grados, profesorado e investigación al servicio del saber humano. In Wikipedia Veritas.',
-  ogImage = '/img/tolosauniversity-logo.jpeg',
+  ogImage = '/img/og-default.jpg',
+  ogImageAlt = 'Escudo de Tolosa University sobre fondo azul con el lema «In Wikipedia Veritas»',
+  noindex = false,
+  schema,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImageUrl = new URL(ogImage, Astro.site).href;
+const logoUrl = new URL('/img/tolosauniversity-logo.jpeg', Astro.site).href;
+const organizationId = new URL('/#organization', Astro.site).href;
+const isHome = Astro.url.pathname === '/';
 
-const jsonLd = {
+const organizationLd = {
   '@context': 'https://schema.org',
   '@type': 'CollegeOrUniversity',
+  '@id': organizationId,
   name: 'Tolosa University',
-  alternateName: 'La universidad de los que to’ lo saben',
+  alternateName: ['La universidad de los que to’ lo saben', 'School of Pre-AI Omniscience'],
   slogan: 'In Wikipedia Veritas',
   url: Astro.site?.href,
-  logo: ogImageUrl,
-  foundingDate: 'Pre-AI',
+  logo: logoUrl,
+  image: ogImageUrl,
+  email: 'info@tolosauniversity.com',
+  telephone: '+34 943 000 000',
   description,
   address: {
     '@type': 'PostalAddress',
@@ -34,6 +47,32 @@ const jsonLd = {
     addressCountry: 'ES',
   },
 };
+
+const webSiteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': new URL('/#website', Astro.site).href,
+  name: 'Tolosa University',
+  url: Astro.site?.href,
+  inLanguage: 'es',
+  publisher: { '@id': organizationId },
+};
+
+// Migas de pan automáticas para las páginas interiores.
+const pageName = title.split('—')[0].trim();
+const breadcrumbLd = isHome
+  ? null
+  : {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Inicio', item: Astro.site?.href },
+        { '@type': 'ListItem', position: 2, name: pageName, item: canonical },
+      ],
+    };
+
+const extraSchemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+const jsonLdBlocks = [organizationLd, webSiteLd, breadcrumbLd, ...extraSchemas].filter(Boolean);
 ---
 
 <!doctype html>
@@ -43,8 +82,10 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
     <meta name="theme-color" content="#14243f" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -53,6 +94,9 @@ const jsonLd = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta property="og:locale" content="es_ES" />
 
     <!-- Twitter -->
@@ -60,6 +104,7 @@ const jsonLd = {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
 
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg" />
     <link rel="icon" href="/img/favicon.ico" sizes="32x32" />
@@ -77,7 +122,9 @@ const jsonLd = {
 
     <slot name="head" />
 
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {jsonLdBlocks.map((block) => (
+      <script type="application/ld+json" set:html={JSON.stringify(block)} />
+    ))}
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-94C41XE0MN"></script>

@@ -13,11 +13,25 @@ const grados = [
   'Máster en Saberlo Todo',
   'Doctorado Honoris Causa en Sabiduría General',
 ];
+
+const generadorSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Generador de títulos de Tolosa University',
+  url: new URL('/generador/', Astro.site).href,
+  applicationCategory: 'DesignApplication',
+  operatingSystem: 'Web',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+  description:
+    'Herramienta gratuita para crear y descargar un diploma honorífico personalizado de Tolosa University con pergamino, orla dorada y sellos.',
+  provider: { '@id': new URL('/#organization', Astro.site).href },
+};
 ---
 
 <Layout
-  title="Genera tu título — Tolosa University"
+  title="Genera tu título universitario gratis — Tolosa University"
   description="Crea y descarga gratis tu diploma honorífico de Tolosa University. Escribe tu nombre y tu grado y obtén un título universitario con pergamino, orla dorada y sellos."
+  schema={generadorSchema}
 >
   <Fragment slot="head">
     <link

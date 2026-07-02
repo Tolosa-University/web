@@ -66,11 +66,34 @@ const masters = [
   'Máster en Divulgación sin Exagerar',
   'Máster en Fuentes Primarias y Notas al Pie',
 ];
+
+const gradosSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Grados de Tolosa University',
+  itemListElement: grados.map((g, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Course',
+      name: g.name,
+      description: g.desc,
+      provider: { '@id': new URL('/#organization', Astro.site).href },
+      offers: { '@type': 'Offer', category: 'Grado universitario' },
+      hasCourseInstance: {
+        '@type': 'CourseInstance',
+        courseMode: 'onsite',
+        location: 'Tolosa, Gipuzkoa',
+      },
+    },
+  })),
+};
 ---
 
 <Layout
-  title="Grados y másteres — Tolosa University"
+  title="Grados universitarios — Tolosa University"
   description="Descubre los grados de Tolosa University: cultura general, cálculo mental, orientación sin GPS, memoria prodigiosa y más. Conocimiento humano, verificado a mano."
+  schema={gradosSchema}
 >
   <PageHero
     eyebrow="Oferta académica"

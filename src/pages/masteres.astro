@@ -57,11 +57,40 @@ const masters = [
     salidas: 'Analista de mercados · Comentarista deportivo del lunes · Historiador de barra',
   },
 ];
+
+const masteresSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Másteres de Tolosa University',
+  itemListElement: [
+    {
+      name: 'Máster en Tertulianismo Profesional',
+      desc: 'El programa estrella: fórmate para opinar de macroeconomía, geopolítica, virología y fichajes de invierno en la misma frase, sin haber abierto un libro de ninguna de las cuatro cosas.',
+    },
+    ...masters.map((m) => ({ name: m.name, desc: m.desc })),
+  ].map((m, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Course',
+      name: m.name,
+      description: m.desc,
+      provider: { '@id': new URL('/#organization', Astro.site).href },
+      offers: { '@type': 'Offer', category: 'Máster universitario' },
+      hasCourseInstance: {
+        '@type': 'CourseInstance',
+        courseMode: 'onsite',
+        location: 'Tolosa, Gipuzkoa',
+      },
+    },
+  })),
+};
 ---
 
 <Layout
-  title="Másteres — Tolosa University"
+  title="Másteres y posgrados — Tolosa University"
   description="Posgrados de Tolosa University: del Máster en Tertulianismo Profesional (opina de todo sin saber nada) al Máster en Silencio Estratégico. Excelencia opinativa desde antes de la IA."
+  schema={masteresSchema}
 >
   <PageHero
     eyebrow="Posgrado"
