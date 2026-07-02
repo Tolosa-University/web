@@ -1,0 +1,155 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+
+const lineas = [
+  {
+    title: 'Instituto de Verdad Verificable',
+    desc: 'Estudiamos qué hacía que un dato fuera fiable antes de que todo se generara solo. Metodología: leer, contrastar y, en caso de duda, preguntar a alguien que estuvo allí.',
+  },
+  {
+    title: 'Laboratorio de Memoria Humana',
+    desc: 'Investigamos los límites de la retención sin ayudas externas. Nuestro récord actual: recitar los 118 elementos de la tabla periódica y las alineaciones de la final del 84.',
+  },
+  {
+    title: 'Observatorio del Saber Cotidiano',
+    desc: 'Documentamos conocimientos en peligro de extinción: leer un mapa de carreteras, hacer un nudo marinero o recordar un número de teléfono de memoria.',
+  },
+  {
+    title: 'Centro de Estudios Enciclopédicos',
+    desc: 'Analizamos la Wikipedia como fenómeno civilizatorio: el último gran acuerdo de la humanidad sobre qué es verdad, escrito por personas para personas.',
+  },
+];
+
+const papers = [
+  {
+    title: 'Sobre la propina óptima cuando no hay señal',
+    authors: 'Zenbaki, A. et al.',
+    journal: 'Revista de Cálculo Mental Aplicado · Vol. 12',
+  },
+  {
+    title: 'El musgo como brújula: un metaanálisis',
+    authors: 'Iparralde, M.',
+    journal: 'Anales de Orientación Natural · Vol. 7',
+  },
+  {
+    title: 'Cita requerida: epistemología de la nota al pie',
+    authors: 'Notaalpié, C.',
+    journal: 'Cuadernos de Verificación · Vol. 21',
+  },
+  {
+    title: 'Cómo ganar un debate sin levantar la voz',
+    authors: 'Sobremesa, B.; Larrañaga, E.',
+    journal: 'Estudios de Retórica Doméstica · Vol. 3',
+  },
+];
+---
+
+<Layout
+  title="Investigación — Tolosa University"
+  description="Institutos y líneas de investigación de Tolosa University: verdad verificable, memoria humana, saber cotidiano y estudios enciclopédicos. Ciencia hecha por personas."
+>
+  <PageHero
+    eyebrow="Investigación"
+    title="Ciencia hecha por personas, para personas"
+    subtitle="Investigamos el conocimiento humano en su estado más puro: el que se conquista leyendo, recordando y comprobando. Sin atajos, sin cajas negras."
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Institutos y laboratorios</p>
+        <h2>Cuatro líneas, un mismo empeño</h2>
+      </div>
+      <div class="grid grid-2">
+        {lineas.map((l) => (
+          <article class="card">
+            <h3>{l.title}</h3>
+            <p>{l.desc}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Publicaciones recientes</p>
+        <h2>Últimos artículos del claustro</h2>
+        <p>Revisados por pares humanos, línea a línea, con un café al lado.</p>
+      </div>
+      <ul class="papers">
+        {papers.map((p) => (
+          <li class="paper">
+            <h3>{p.title}</h3>
+            <p class="paper-meta">{p.authors} · <span>{p.journal}</span></p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--navy">
+    <div class="wrap stats-band">
+      <div><span class="big">100%</span><span>Revisión por pares humana</span></div>
+      <div><span class="big">0</span><span>Datos inventados por una máquina</span></div>
+      <div><span class="big">1.284</span><span>Notas al pie el año pasado</span></div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .papers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  .paper {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.3rem 1.5rem;
+    border-left: 4px solid var(--gold);
+  }
+  .paper h3 {
+    margin: 0 0 0.4rem;
+    font-size: 1.12rem;
+  }
+  .paper-meta {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .paper-meta span {
+    font-style: italic;
+  }
+
+  .stats-band {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+  .stats-band > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    color: #c3ccdb;
+  }
+  .stats-band .big {
+    font-family: var(--font-serif);
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  @media (max-width: 620px) {
+    .stats-band {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>

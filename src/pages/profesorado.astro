@@ -1,0 +1,150 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+
+// Iniciales para el avatar-emblema de cada docente.
+const faculty = [
+  {
+    name: 'Dra. Enciclopedia Larrañaga',
+    role: 'Rectora · Cátedra de Cultura General',
+    bio: 'Se sabe las capitales del mundo, incluidas las que cambiaron de nombre. Ganó tres veces el Trivial familiar de Nochebuena antes de que le prohibieran jugar.',
+  },
+  {
+    name: 'Prof. Aitor Zenbaki',
+    role: 'Decano de Números',
+    bio: 'Calcula raíces cuadradas mientras aparca en paralelo. Divide la cuenta del restaurante entre doce, con propina, antes de que llegue el datáfono.',
+  },
+  {
+    name: 'Dra. Miren Iparralde',
+    role: 'Cátedra de Orientación sin GPS',
+    bio: 'No ha usado un navegador desde 2004 y nunca ha llegado tarde. Encuentra el norte con un reloj analógico y una mirada al cielo.',
+  },
+  {
+    name: 'Prof. Cándido Notaalpié',
+    role: 'Cátedra de Fuentes y Verificación',
+    bio: 'Antes de afirmar algo, comprueba la fuente, la fuente de la fuente y el historial de ediciones. Su frase favorita: «cita requerida».',
+  },
+  {
+    name: 'Dra. Amaia Oroimen',
+    role: 'Cátedra de Memoria Prodigiosa',
+    bio: 'Recuerda el cumpleaños de todos sus 400 alumnos y el número de teléfono de su primera casa. Su cabeza no necesita copia de seguridad.',
+  },
+  {
+    name: 'Prof. Baldomero Sobremesa',
+    role: 'Cátedra de Retórica y Debate',
+    bio: 'Nunca ha perdido una discusión de sobremesa. Cita a Cicerón en euskera y desmonta una falacia con una ceja levantada.',
+  },
+  {
+    name: 'Dra. Koldobika Eskulan',
+    role: 'Cátedra de Bricolaje del Conocimiento',
+    bio: 'Monta cualquier mueble sin las instrucciones y cocina sin receta. Cree que saber hacer cosas con las manos es la forma más honesta de sabiduría.',
+  },
+  {
+    name: 'Prof. Historio Kontari',
+    role: 'Cátedra de Historia Oral',
+    bio: 'Cuenta 5.000 años de historia sin apuntes y sin aburrir. Empieza por los sumerios y, si le dejas, llega hasta las noticias de esta mañana.',
+  },
+];
+---
+
+<Layout
+  title="Profesorado — Tolosa University"
+  description="Conoce al claustro de Tolosa University: catedráticos que se lo saben todo de memoria, sin calculadora, sin GPS y sin inteligencia artificial."
+>
+  <PageHero
+    eyebrow="Nuestro claustro"
+    title="Profesores que se lo saben todo (de verdad)"
+    subtitle="Un claustro de eruditos que aprendieron a saber antes de que existieran los atajos. Aquí nadie improvisa: aquí se recuerda."
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid grid-2 faculty-grid">
+        {faculty.map((p) => {
+          const initials = p.name
+            .replace(/^(Dra?\.|Prof\.)\s*/i, '')
+            .split(' ')
+            .map((w) => w[0])
+            .slice(0, 2)
+            .join('');
+          return (
+            <article class="prof">
+              <div class="avatar" aria-hidden="true">{initials}</div>
+              <div class="prof-body">
+                <h3>{p.name}</h3>
+                <p class="prof-role">{p.role}</p>
+                <p class="prof-bio">{p.bio}</p>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="wrap center join">
+      <p class="eyebrow">Trabaja con nosotros</p>
+      <h2>¿Te lo sabes todo? Da clase aquí</h2>
+      <p class="lead">Buscamos mentes inquietas que aún prefieran pensar. Sin cursos de <em>prompting</em>, gracias.</p>
+      <a href="mailto:claustro@tolosauniversity.com" class="btn btn-outline">Envía tu candidatura</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .prof {
+    display: flex;
+    gap: 1.25rem;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1.6rem;
+    align-items: flex-start;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .prof:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px rgba(20, 36, 63, 0.1);
+    border-color: var(--gold);
+  }
+  .avatar {
+    flex: 0 0 auto;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--gold-light);
+    display: grid;
+    place-items: center;
+    font-family: var(--font-slab);
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: 0.02em;
+    border: 2px solid var(--gold);
+  }
+  .prof h3 {
+    margin: 0 0 0.2rem;
+    font-size: 1.2rem;
+  }
+  .prof-role {
+    margin: 0 0 0.7rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+  .prof-bio {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.96rem;
+  }
+  .center {
+    text-align: center;
+  }
+  .join .lead {
+    margin: 0.6rem auto 1.6rem;
+    max-width: 38rem;
+  }
+</style>

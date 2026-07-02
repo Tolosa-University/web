@@ -1,0 +1,138 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+
+const servicios = [
+  {
+    id: 'biblioteca',
+    title: 'Biblioteca Universal',
+    desc: 'Enciclopedias en papel, hemeroteca, atlas de tapa dura y una conexión a la Wikipedia que consideramos infraestructura crítica. Silencio garantizado y olor a libro incluido.',
+  },
+  {
+    id: 'residencia',
+    title: 'Colegios Mayores',
+    desc: 'Habitaciones sin domótica, con estantería y flexo. El wifi funciona, pero te invitamos a apagarlo de vez en cuando y mirar por la ventana.',
+  },
+  {
+    id: 'deportes',
+    title: 'Deporte y Aire Libre',
+    desc: 'Frontón, montes cercanos y rutas de senderismo señalizadas a la antigua. El mejor gimnasio para la mente es un buen paseo sin auriculares.',
+  },
+  {
+    id: 'comedor',
+    title: 'Comedor Universitario',
+    desc: 'Menú del día honesto, pintxos de repaso y sobremesas largas donde de verdad se aprende. La tertulia es una asignatura no oficial pero obligatoria.',
+  },
+  {
+    id: 'orientacion',
+    title: 'Orientación Académica',
+    desc: 'Tutores de carne y hueso que te escuchan sin cronómetro. Te ayudan a elegir itinerario y, si hace falta, a recordar por qué empezaste.',
+  },
+  {
+    id: 'debate',
+    title: 'Club de Debate',
+    desc: 'El corazón social del campus. Se debate de todo, se cita de memoria y se cierra la noche con la sensación de haber aprendido algo nuevo.',
+  },
+  {
+    id: 'idiomas',
+    title: 'Centro de Idiomas',
+    desc: 'Euskera, castellano, inglés, latín y lo que haga falta. Traducimos con diccionario y cabeza, que para eso están las dos cosas.',
+  },
+  {
+    id: 'carreras',
+    title: 'Bolsa de Empleo',
+    desc: 'Conectamos a nuestros titulados con empresas que todavía valoran a alguien capaz de pensar por su cuenta. Spoiler: son más de las que crees.',
+  },
+];
+---
+
+<Layout
+  title="Servicios y campus — Tolosa University"
+  description="Servicios de Tolosa University: biblioteca universal, colegios mayores, deporte, comedor, orientación, club de debate y más. Un campus pensado para pensar."
+>
+  <PageHero
+    eyebrow="Vida en el campus"
+    title="Todo lo que necesitas para saberlo todo"
+    subtitle="Un campus a la orilla del Oria pensado para la concentración, la conversación y el placer de aprender sin prisas."
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid grid-2">
+        {servicios.map((s) => (
+          <article id={s.id} class="card service">
+            <h3>{s.title}</h3>
+            <p>{s.desc}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--navy">
+    <div class="wrap campus">
+      <div>
+        <p class="eyebrow">El campus</p>
+        <h2>En Tolosa, donde siempre se supo de todo</h2>
+        <p>
+          Nuestro campus se levanta en Tolosa, Gipuzkoa: tierra de mercado, de imprenta y de
+          buena conversación. Un lugar donde el conocimiento tiene raíces y las sobremesas,
+          criterio.
+        </p>
+        <a href="/admisiones/" class="btn btn-primary">Ven a visitarnos</a>
+      </div>
+      <ul class="facts">
+        <li><strong>Ubicación</strong><span>Tolosa · Gipuzkoa · País Vasco</span></li>
+        <li><strong>Fundación</strong><span>Est. Pre-AI</span></li>
+        <li><strong>Idiomas del campus</strong><span>Euskera y castellano</span></li>
+        <li><strong>Horario de biblioteca</strong><span>Hasta que se te acaben las preguntas</span></li>
+      </ul>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .service {
+    scroll-margin-top: 6rem;
+  }
+  .campus {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .campus p {
+    color: #c3ccdb;
+    margin-bottom: 1.6rem;
+  }
+  .facts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.9rem;
+  }
+  .facts li {
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.04);
+    border-left: 3px solid var(--gold);
+    padding: 0.85rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+  }
+  .facts strong {
+    color: var(--gold-light);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .facts span {
+    color: #dfe4ee;
+  }
+  @media (max-width: 820px) {
+    .campus {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>

@@ -1,0 +1,167 @@
+---
+import Monogram from './Monogram.astro';
+
+const year = 2026;
+---
+
+<footer class="site-footer">
+  <div class="inner">
+    <div class="col brand-col">
+      <div class="brand">
+        <Monogram size={54} />
+        <div>
+          <p class="name">Tolosa University</p>
+          <p class="motto">In Wikipedia Veritas</p>
+        </div>
+      </div>
+      <p class="blurb">
+        La universidad de los que <em>to' lo saben</em>. Formando mentes
+        omniscientes desde antes de que existiera la inteligencia artificial.
+      </p>
+    </div>
+
+    <nav class="col" aria-label="Explorar">
+      <h3>Universidad</h3>
+      <a href="/grados/">Grados</a>
+      <a href="/profesorado/">Profesorado</a>
+      <a href="/investigacion/">Investigación</a>
+      <a href="/servicios/">Servicios</a>
+      <a href="/nosotros/">Nosotros</a>
+    </nav>
+
+    <nav class="col" aria-label="Futuro alumnado">
+      <h3>Admisiones</h3>
+      <a href="/admisiones/">Solicitar plaza</a>
+      <a href="/admisiones/#requisitos">Requisitos</a>
+      <a href="/admisiones/#calendario">Calendario</a>
+      <a href="/servicios/#biblioteca">Biblioteca</a>
+    </nav>
+
+    <div class="col">
+      <h3>Contacto</h3>
+      <p>Campus de Tolosa<br />Gipuzkoa, País Vasco</p>
+      <p>+34 943 000 000<br /><a href="mailto:info@tolosauniversity.com">info@tolosauniversity.com</a></p>
+    </div>
+  </div>
+
+  <div class="legal">
+    <p>© {year} Tolosa University · Est. Pre-AI. Todos los conocimientos reservados.</p>
+    <p class="wink">Verificado a mano, sin ayuda de máquinas.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--navy);
+    color: #cdd4e0;
+    margin-top: 5rem;
+    border-top: 3px solid var(--gold);
+  }
+
+  .inner {
+    max-width: 74rem;
+    margin-inline: auto;
+    padding: 3.5rem 1.5rem 2.5rem;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+    gap: 2.5rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .name {
+    font-family: var(--font-slab);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #fff;
+    margin: 0;
+  }
+
+  .motto {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--gold-light);
+    margin: 0.15rem 0 0;
+    font-size: 0.9rem;
+  }
+
+  .blurb {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-width: 24rem;
+    color: #b6bfce;
+  }
+
+  .col h3 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    margin: 0 0 1rem;
+  }
+
+  .col a {
+    display: block;
+    color: #cdd4e0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.28rem 0;
+    transition: color 0.15s ease;
+  }
+
+  .col a:hover {
+    color: #fff;
+  }
+
+  .col p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0 0 0.9rem;
+  }
+
+  .legal {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.25rem 1.5rem;
+    max-width: 74rem;
+    margin-inline: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: #9aa4b5;
+  }
+
+  .legal p {
+    margin: 0;
+  }
+
+  .wink {
+    font-style: italic;
+  }
+
+  @media (max-width: 860px) {
+    .inner {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .brand-col {
+      grid-column: 1 / -1;
+    }
+    .legal {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

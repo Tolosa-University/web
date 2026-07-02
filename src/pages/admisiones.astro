@@ -1,0 +1,291 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+
+const pasos = [
+  { n: '1', title: 'Solicitud', text: 'Rellena el formulario. A mano, si te apetece, aunque aceptamos teclado.' },
+  { n: '2', title: 'Prueba de saberes', text: 'Una conversación distendida donde demuestras curiosidad. No hay tipo test: hay charla.' },
+  { n: '3', title: 'Entrevista', text: 'Nos cuentas qué te gustaría saber y por qué. Las respuestas correctas nos importan menos que las buenas preguntas.' },
+  { n: '4', title: 'Matrícula', text: 'Bienvenido a la última generación que lo sabrá todo por sí misma.' },
+];
+
+const requisitos = [
+  'Curiosidad incurable y ganas de discutir con argumentos.',
+  'Capacidad de leer un texto largo hasta el final. Sí, hasta el final.',
+  'Disposición a recordar cosas sin apuntarlas en el móvil.',
+  'Tolerancia a las sobremesas de más de dos horas.',
+  'No es imprescindible saberlo todo al entrar. Al salir, sí.',
+];
+
+const calendario = [
+  { fecha: 'Otoño', evento: 'Apertura del plazo de solicitud' },
+  { fecha: 'Invierno', evento: 'Pruebas de saberes y entrevistas' },
+  { fecha: 'Primavera', evento: 'Publicación de admitidos (en tablón de corcho)' },
+  { fecha: 'Verano', evento: 'Matrícula y bienvenida' },
+];
+---
+
+<Layout
+  title="Admisiones — Tolosa University"
+  description="Solicita plaza en Tolosa University. Proceso de admisión, requisitos y calendario para el curso 2025/2026. Únete a la universidad de los que to’ lo saben."
+>
+  <PageHero
+    eyebrow="Admisiones · Curso 2025 / 2026"
+    title="Solicita tu plaza en Tolosa"
+    subtitle="El proceso es humano de principio a fin. Nos interesa cómo piensas, no cuánto memorizas para el examen de acceso."
+  />
+
+  <!-- PROCESO -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head center">
+        <p class="eyebrow">Cómo entrar</p>
+        <h2>Cuatro pasos, ninguna letra pequeña</h2>
+      </div>
+      <div class="grid grid-4">
+        {pasos.map((p) => (
+          <div class="step">
+            <span class="step-n">{p.n}</span>
+            <h3>{p.title}</h3>
+            <p>{p.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- REQUISITOS + CALENDARIO -->
+  <section class="section section--cream">
+    <div class="wrap two-col">
+      <div id="requisitos">
+        <p class="eyebrow">Requisitos</p>
+        <h2>Qué buscamos en ti</h2>
+        <hr class="divider" />
+        <ul class="req-list">
+          {requisitos.map((r) => (
+            <li>{r}</li>
+          ))}
+        </ul>
+      </div>
+      <div id="calendario">
+        <p class="eyebrow">Calendario</p>
+        <h2>Fechas clave</h2>
+        <hr class="divider" />
+        <table class="cal">
+          <tbody>
+            {calendario.map((c) => (
+              <tr>
+                <th scope="row">{c.fecha}</th>
+                <td>{c.evento}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p class="cal-note">Sin fechas exactas: el conocimiento no entiende de relojes, pero avisamos con tiempo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULARIO -->
+  <section class="section">
+    <div class="wrap form-wrap">
+      <div class="section-head center">
+        <p class="eyebrow">Formulario de solicitud</p>
+        <h2>Empieza aquí tu candidatura</h2>
+        <p>Rellena tus datos y nos pondremos en contacto para la charla. Sin compromiso y sin robots de por medio.</p>
+      </div>
+
+      <form class="apply-form" name="solicitud" onsubmit="return false;">
+        <div class="row">
+          <label>
+            Nombre y apellidos
+            <input type="text" name="nombre" placeholder="Tu nombre completo" required />
+          </label>
+          <label>
+            Correo electrónico
+            <input type="email" name="email" placeholder="tu@correo.com" required />
+          </label>
+        </div>
+        <div class="row">
+          <label>
+            Grado de interés
+            <select name="grado">
+              <option>Cultura General Aplicada</option>
+              <option>Consulta Enciclopédica</option>
+              <option>Cálculo Mental Clásico</option>
+              <option>Orientación sin GPS</option>
+              <option>Retórica y Debate de Sobremesa</option>
+              <option>Memoria Prodigiosa</option>
+              <option>Historia Contada de Memoria</option>
+              <option>Bricolaje del Conocimiento</option>
+              <option>Aún no lo sé (¡nos encanta!)</option>
+            </select>
+          </label>
+          <label>
+            Teléfono
+            <input type="tel" name="telefono" placeholder="Opcional" />
+          </label>
+        </div>
+        <label>
+          ¿Qué te gustaría saber que aún no sabes?
+          <textarea name="motivacion" rows="4" placeholder="Cuéntanoslo con tus propias palabras."></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary">Enviar solicitud</button>
+        <p class="form-note">
+          Este formulario es una demostración de una universidad ficticia: no envía datos a ningún
+          sitio. Para consultas reales, escríbenos a
+          <a href="mailto:info@tolosauniversity.com">info@tolosauniversity.com</a>.
+        </p>
+      </form>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .step {
+    text-align: center;
+    padding: 1.5rem 1rem;
+  }
+  .step-n {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--gold-light);
+    font-family: var(--font-serif);
+    font-weight: 800;
+    font-size: 1.35rem;
+    border: 2px solid var(--gold);
+  }
+  .step h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.15rem;
+  }
+  .step p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.94rem;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .req-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .req-list li {
+    position: relative;
+    padding-left: 1.8rem;
+    color: var(--ink);
+  }
+  .req-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--gold-deep);
+    font-weight: 800;
+  }
+
+  .cal {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .cal th,
+  .cal td {
+    text-align: left;
+    padding: 0.85rem 0.5rem;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  .cal th {
+    width: 35%;
+    color: var(--gold-deep);
+    font-weight: 700;
+  }
+  .cal-note {
+    font-size: 0.88rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 1rem;
+  }
+
+  .form-wrap {
+    max-width: 46rem;
+  }
+  .apply-form {
+    display: grid;
+    gap: 1.2rem;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 2.2rem;
+    box-shadow: 0 12px 34px rgba(20, 36, 63, 0.06);
+  }
+  .apply-form .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+  .apply-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--navy);
+  }
+  .apply-form input,
+  .apply-form select,
+  .apply-form textarea {
+    font: inherit;
+    font-weight: 400;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .apply-form input:focus,
+  .apply-form select:focus,
+  .apply-form textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(193, 154, 75, 0.18);
+  }
+  .apply-form textarea {
+    resize: vertical;
+  }
+  .apply-form button {
+    justify-self: start;
+    border: 0;
+    cursor: pointer;
+  }
+  .form-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  @media (max-width: 720px) {
+    .two-col,
+    .apply-form .row {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+    .two-col {
+      gap: 2.5rem;
+    }
+  }
+</style>

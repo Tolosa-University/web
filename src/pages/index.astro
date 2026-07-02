@@ -1,30 +1,355 @@
 ---
-import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
-import header from '../assets/tolosauniversity-header.jpeg';
+import Monogram from '../components/Monogram.astro';
+
+const stats = [
+  { n: '1', label: 'Fuente de la verdad', sub: 'Wikipedia' },
+  { n: '0', label: 'Redes neuronales usadas', sub: 'Ninguna, y a mucha honra' },
+  { n: '∞', label: 'Cosas que sabemos', sub: 'Literalmente todo' },
+  { n: 'Pre-AI', label: 'Año de fundación', sub: 'Cuando la gente pensaba' },
+];
+
+const featured = [
+  {
+    title: 'Cultura General Avanzada',
+    desc: 'El arte de tener una respuesta razonable para cualquier pregunta de sobremesa, sin consultar el móvil bajo la mesa.',
+  },
+  {
+    title: 'Buceo Documental sin Redes',
+    desc: 'Deep diving en la enciclopedia hasta el fondo del artículo, saltando de hipervínculo en hipervínculo durante horas. Como antes.',
+  },
+  {
+    title: 'Cálculo Mental Clásico',
+    desc: 'Dividir la cuenta del restaurante entre siete comensales, con propina, antes de que nadie saque la calculadora.',
+  },
+];
 ---
 
 <Layout>
-  <div class="hero">
-    <Image src={header} alt="Tolosa University" loading="eager" fetchpriority="high" />
-    <h1>2025 / 2026</h1>
-    <p class="lead">La universidad de los que <i>to' losaben</i>.</p>
-  </div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="wrap hero-content">
+      <Monogram size={78} class="hero-crest" />
+      <p class="hero-eyebrow">In Wikipedia Veritas · Est. Pre-AI</p>
+      <h1>La escuela de la <span class="hl">omnisciencia</span> anterior a la IA</h1>
+      <p class="hero-sub">
+        Bienvenidos a Tolosa University: la universidad de los que <em>to’ lo saben</em>.
+        Formamos mentes capaces de saberlo todo por sí solas, tal y como se hacía cuando
+        el conocimiento aún era un asunto humano.
+      </p>
+      <div class="hero-cta">
+        <a href="/admisiones/" class="btn btn-primary">Solicitar plaza</a>
+        <a href="/grados/" class="btn btn-ghost">Ver grados</a>
+      </div>
+    </div>
+    <div class="hero-marquee" aria-hidden="true">
+      <span>Saber es poder</span><span>·</span><span>Wikipedia es verdad</span><span>·</span>
+      <span>Cero prompts</span><span>·</span><span>Cien por cien humano</span><span>·</span>
+      <span>Saber es poder</span><span>·</span><span>Wikipedia es verdad</span><span>·</span>
+      <span>Cero prompts</span><span>·</span><span>Cien por cien humano</span><span>·</span>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="section stats-section">
+    <div class="wrap">
+      <div class="grid grid-4 stats">
+        {stats.map((s) => (
+          <div class="stat">
+            <span class="stat-n">{s.n}</span>
+            <span class="stat-label">{s.label}</span>
+            <span class="stat-sub">{s.sub}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FILOSOFÍA -->
+  <section class="section section--cream">
+    <div class="wrap philosophy">
+      <div class="philosophy-text">
+        <p class="eyebrow">Nuestra filosofía</p>
+        <h2>Por qué la Wikipedia sigue siendo la verdad</h2>
+        <hr class="divider" />
+        <p>
+          Hubo un tiempo, no tan lejano, en el que si querías saber algo lo buscabas, lo leías
+          y —esto es lo revolucionario— lo <strong>recordabas</strong>. En Tolosa University
+          mantenemos viva aquella tradición: el conocimiento se conquista con curiosidad, paciencia
+          y una pestaña abierta en la enciclopedia libre.
+        </p>
+        <p>
+          No tenemos nada en contra de las máquinas. Simplemente creemos que un titulado nuestro
+          debería ser capaz de ganar un debate, orientarse sin GPS y explicar la Guerra de los
+          Treinta Años sin pedirle permiso a nadie. Radical, lo sabemos.
+        </p>
+        <a href="/nosotros/" class="btn btn-outline">Conócenos</a>
+      </div>
+      <blockquote class="pull-quote">
+        <p>“Antes de la IA, la gente <span>ya lo sabía todo</span>. Nosotros nunca dejamos de hacerlo.”</p>
+        <footer>— Claustro de Tolosa University</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- CURSOS DESTACADOS -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head center">
+        <p class="eyebrow">Asignaturas destacadas</p>
+        <h2>Lo que se aprende cuando piensas por ti mismo</h2>
+        <p>Una selección de nuestras materias más solicitadas por quienes aún prefieren su propia cabeza.</p>
+      </div>
+      <div class="grid grid-3">
+        {featured.map((c, i) => (
+          <article class="card">
+            <span class="card-num">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{c.title}</h3>
+            <p>{c.desc}</p>
+          </article>
+        ))}
+      </div>
+      <div class="center-cta">
+        <a href="/grados/" class="btn btn-outline">Ver todos los grados</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILARES -->
+  <section class="section section--navy">
+    <div class="wrap">
+      <div class="section-head center">
+        <p class="eyebrow">Por qué Tolosa</p>
+        <h2>Tres pilares, cero algoritmos</h2>
+      </div>
+      <div class="grid grid-3 pillars">
+        <div class="pillar">
+          <h3>Conocimiento verificado</h3>
+          <p>Cada dato se comprueba a mano, se contrasta con las fuentes y se firma con la conciencia tranquila. Sin alucinaciones.</p>
+        </div>
+        <div class="pillar">
+          <h3>Memoria de verdad</h3>
+          <p>Aquí la información no vive en la nube: vive en tu cabeza. Entrenamos la retención como quien entrena para una maratón.</p>
+        </div>
+        <div class="pillar">
+          <h3>Criterio propio</h3>
+          <p>Enseñamos a dudar, a preguntar y a distinguir el saber del ruido. El pensamiento crítico no ha pasado de moda.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="section final-cta">
+    <div class="wrap center">
+      <p class="eyebrow">Curso 2025 / 2026</p>
+      <h2>Únete a la última generación que lo sabrá todo por sí misma</h2>
+      <p class="lead">Las plazas son limitadas. El conocimiento, no.</p>
+      <a href="/admisiones/" class="btn btn-primary">Empieza tu solicitud</a>
+    </div>
+  </section>
 </Layout>
 
 <style>
+  /* HERO */
   .hero {
-    padding: 3rem 1.5rem;
+    position: relative;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(193, 154, 75, 0.16), transparent 45%),
+      linear-gradient(160deg, #10203a 0%, #14243f 45%, #1d3255 100%);
+    color: #fff;
+    overflow: hidden;
+    padding-block: 5.5rem 0;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 26px 26px;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    text-align: center;
+    max-width: 52rem;
+    padding-bottom: 4.5rem;
+  }
+
+  .hero-crest {
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.35));
+  }
+
+  .hero-eyebrow {
+    font-size: 0.82rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin: 0 0 1.2rem;
+    font-weight: 600;
+  }
+
+  .hero h1 {
+    color: #fff;
+    font-size: clamp(2.3rem, 6vw, 4rem);
+    margin: 0 0 1.4rem;
+    line-height: 1.08;
+  }
+  .hero .hl {
+    color: var(--gold-light);
+    font-style: italic;
+  }
+
+  .hero-sub {
+    font-size: 1.2rem;
+    color: #cdd6e4;
+    max-width: 40rem;
+    margin: 0 auto 2rem;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .hero-marquee {
+    position: relative;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    white-space: nowrap;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 3px solid var(--gold);
+    padding: 0.9rem 0;
+    font-family: var(--font-slab);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.85rem;
+    color: var(--gold-light);
+    animation: scroll 26s linear infinite;
+  }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* STATS */
+  .stats-section {
+    padding-block: 3rem;
+  }
+  .stats {
+    text-align: center;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.5rem;
+  }
+  .stat-n {
+    font-family: var(--font-serif);
+    font-weight: 800;
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    color: var(--gold-deep);
+    line-height: 1;
+  }
+  .stat-label {
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .stat-sub {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  /* FILOSOFÍA */
+  .philosophy {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+  .philosophy-text p {
+    color: var(--muted);
+    font-size: 1.05rem;
+  }
+  .pull-quote {
+    margin: 0;
+    background: var(--navy);
+    color: #fff;
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    border-left: 5px solid var(--gold);
+  }
+  .pull-quote p {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.5rem;
+    line-height: 1.35;
+    margin: 0 0 1rem;
+  }
+  .pull-quote span {
+    color: var(--gold-light);
+  }
+  .pull-quote footer {
+    font-size: 0.9rem;
+    color: #b9c2d2;
+    font-style: normal;
+  }
+
+  /* CARDS */
+  .card-num {
+    font-family: var(--font-serif);
+    font-weight: 800;
+    color: var(--gold);
+    font-size: 1.5rem;
+  }
+  .center-cta,
+  .final-cta .center {
+    text-align: center;
+  }
+  .center-cta {
+    margin-top: 2.5rem;
     text-align: center;
   }
 
-  .hero img {
-    max-width: 100%;
-    height: auto;
+  /* PILARES */
+  .pillar {
+    padding: 1.5rem;
+    border-left: 3px solid var(--gold);
+  }
+  .pillar h3 {
+    color: #fff;
+    margin: 0 0 0.6rem;
+  }
+  .pillar p {
+    color: #b9c2d2;
+    margin: 0;
   }
 
-  .lead {
-    font-size: 1.25rem;
-    font-weight: 300;
+  /* CTA FINAL */
+  .final-cta {
+    background: var(--cream);
+  }
+  .final-cta h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    max-width: 40rem;
+    margin: 0.4rem auto 0.8rem;
+  }
+  .final-cta .lead {
+    margin: 0 auto 1.8rem;
+  }
+
+  @media (max-width: 820px) {
+    .philosophy {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
   }
 </style>

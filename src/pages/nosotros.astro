@@ -1,0 +1,221 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+
+const timeline = [
+  {
+    year: 'Pre-AI',
+    title: 'Fundación',
+    text: 'Un grupo de tolosarras que se lo sabían todo decide poner el conocimiento por escrito, antes de que a nadie se le ocurriera automatizarlo.',
+  },
+  {
+    year: 'Siglos de saber',
+    title: 'La edad de oro del dato',
+    text: 'La universidad florece en la época en que la gente memorizaba poemas, leía el periódico entero y discutía de historia sin mirar el móvil.',
+  },
+  {
+    year: 'La llegada de las máquinas',
+    title: 'Resistimos',
+    text: 'Cuando el mundo empezó a delegar la memoria y el criterio, nosotros doblamos la apuesta por el conocimiento humano. In Wikipedia Veritas.',
+  },
+  {
+    year: 'Hoy',
+    title: 'Guardianes de la omnisciencia',
+    text: 'Seguimos formando a las personas más cultas del planeta, una nota al pie cada vez. El futuro nos dará la razón; nosotros ya la teníamos.',
+  },
+];
+
+const valores = [
+  { title: 'Curiosidad', text: 'La única materia prima que nunca se agota y no necesita batería.' },
+  { title: 'Rigor', text: 'Si no está comprobado, no se afirma. Y si está comprobado, se cita.' },
+  { title: 'Humildad', text: 'Saberlo todo empieza por reconocer con elegancia lo que aún no sabes.' },
+  { title: 'Conversación', text: 'El conocimiento se pule hablando. Aquí nadie aprende en silencio total.' },
+];
+---
+
+<Layout
+  title="Sobre nosotros — Tolosa University"
+  description="La historia, la misión y los valores de Tolosa University: la universidad fundada antes de la inteligencia artificial para preservar el conocimiento humano."
+>
+  <PageHero
+    eyebrow="Sobre nosotros"
+    title="Una universidad anterior a la inteligencia artificial"
+    subtitle="Existíamos cuando la gente lo sabía todo sin ayuda de las máquinas. Y no pensamos dejar de hacerlo."
+  />
+
+  <section class="section">
+    <div class="wrap mission">
+      <div>
+        <p class="eyebrow">Nuestra misión</p>
+        <h2>Mantener vivo el arte de saber</h2>
+        <hr class="divider" />
+        <p>
+          Tolosa University nació con una idea sencilla y hoy casi revolucionaria: que una persona
+          culta, curiosa y bien informada es capaz de entender el mundo por sí misma. No fabricamos
+          respuestas: formamos a quienes las encuentran.
+        </p>
+        <p>
+          Nuestro lema, <em>In Wikipedia Veritas</em>, es un homenaje a la última gran hazaña
+          colectiva del saber humano: una enciclopedia escrita por millones de personas que, sin
+          cobrar, decidieron ponerse de acuerdo sobre lo que es verdad. Nos parece hermoso. Nos
+          parece suficiente.
+        </p>
+      </div>
+      <aside class="motto-box">
+        <span class="motto-latin">In Wikipedia Veritas</span>
+        <span class="motto-trad">«En la Wikipedia, la verdad»</span>
+        <hr class="divider" />
+        <p>Est. Pre-AI · Tolosa, Gipuzkoa</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Nuestra historia</p>
+        <h2>De siempre hasta ahora</h2>
+      </div>
+      <ol class="timeline">
+        {timeline.map((t) => (
+          <li>
+            <span class="tl-year">{t.year}</span>
+            <div class="tl-body">
+              <h3>{t.title}</h3>
+              <p>{t.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head center">
+        <p class="eyebrow">Nuestros valores</p>
+        <h2>En qué creemos</h2>
+      </div>
+      <div class="grid grid-4">
+        {valores.map((v) => (
+          <div class="card value">
+            <h3>{v.title}</h3>
+            <p>{v.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--navy">
+    <div class="wrap center">
+      <h2>El conocimiento humano tiene quien lo defienda</h2>
+      <p class="lead" style="color:#c3ccdb">Y ese alguien puedes ser tú.</p>
+      <a href="/admisiones/" class="btn btn-primary">Únete a Tolosa</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .mission {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .mission p {
+    color: var(--muted);
+    font-size: 1.05rem;
+  }
+  .motto-box {
+    background: var(--navy);
+    color: #fff;
+    border-radius: 12px;
+    padding: 2.2rem;
+    text-align: center;
+    border-top: 4px solid var(--gold);
+  }
+  .motto-latin {
+    display: block;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.6rem;
+    color: var(--gold-light);
+  }
+  .motto-trad {
+    display: block;
+    color: #c3ccdb;
+    margin-top: 0.4rem;
+  }
+  .motto-box p {
+    color: #b9c2d2;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 9px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+  .timeline li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 1.5rem;
+    padding: 0 0 2rem 2.2rem;
+  }
+  .timeline li::before {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 6px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 3px solid var(--cream);
+  }
+  .tl-year {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    color: var(--gold-deep);
+    font-size: 1.1rem;
+  }
+  .tl-body h3 {
+    margin: 0 0 0.4rem;
+    font-size: 1.25rem;
+  }
+  .tl-body p {
+    margin: 0;
+    color: var(--muted);
+  }
+  .value h3 {
+    color: var(--navy);
+  }
+  .center {
+    text-align: center;
+  }
+
+  @media (max-width: 780px) {
+    .mission {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .timeline li {
+      grid-template-columns: 1fr;
+      gap: 0.35rem;
+    }
+  }
+</style>
