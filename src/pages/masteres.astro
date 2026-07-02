@@ -1,0 +1,331 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+
+const asignaturas = [
+  { name: '«Yo lo que creo es que…»: Introducción al Opinar', ects: '12 ECTS' },
+  { name: 'Interrupción Asertiva I y II', ects: '9 ECTS' },
+  { name: 'Vehemencia Aplicada: subir el volumen cuando bajan los argumentos', ects: '6 ECTS' },
+  { name: 'Lectura Diagonal de Titulares', ects: '6 ECTS' },
+  { name: 'Pivote Temático: de la prima de riesgo a la crianza del bogavante sin pestañear', ects: '9 ECTS' },
+  { name: 'Gestualidad de Plató: la ceja, el bolígrafo y el «déjame terminar»', ects: '6 ECTS' },
+  { name: 'Geopolítica Exprés: opinar de siete conflictos con un solo mapa mental', ects: '6 ECTS' },
+  { name: 'TFM: opinar del TFM de un compañero sin haberlo leído', ects: '6 ECTS' },
+];
+
+const masters = [
+  {
+    name: 'Máster en Saberlo Todo (habilitante)',
+    tag: 'Facultad de Saberes Humanos',
+    duration: '2 años',
+    desc: 'El posgrado clásico de la casa. Habilita legalmente para empezar frases con «pues te lo explico» en cualquier país del espacio Schengen.',
+    salidas: 'Enciclopedia andante · Comodín de la llamada · Jefe de estudios',
+  },
+  {
+    name: 'Máster en Divulgación sin Exagerar',
+    tag: 'Facultad de Elocuencia',
+    duration: '1 año',
+    desc: 'Contar la ciencia sin decir que «los científicos están aterrados». Incluye seminario intensivo de titulares que no traicionan al estudio que citan.',
+    salidas: 'Divulgador honesto · Redactor científico · Rareza de internet',
+  },
+  {
+    name: 'Máster en Fuentes Primarias y Notas al Pie',
+    tag: 'Facultad de Documentación',
+    duration: '2 años',
+    desc: 'Para quienes leen la bibliografía por placer. Se sale sabiendo distinguir un «según un estudio» de un estudio de verdad, con nota al pie incluida.',
+    salidas: 'Verificador de datos · Editor académico · Azote de bulos',
+  },
+  {
+    name: 'Máster en Corrección de Desconocidos («Actually…»)',
+    tag: 'Facultad de Elocuencia',
+    duration: '1 año',
+    desc: 'Sí, hay que corregir el dato. No, no hace falta arruinar la cena. Aprende a puntualizar con elegancia y a retirarte a tiempo de un hilo perdido.',
+    salidas: 'Moderador de foros · Diplomático de sobremesa · Exdiscutidor de internet',
+  },
+  {
+    name: 'Máster en Silencio Estratégico',
+    tag: 'Facultad de la Mente',
+    duration: '1 año',
+    desc: 'El posgrado más difícil de aprobar: no opinar cuando no se sabe. Tasa de abandono del 94%, casi siempre en la primera sobremesa con familia.',
+    salidas: 'Sabio discreto · Asesor de confianza · Persona que cae bien',
+  },
+  {
+    name: 'Máster en Predicción Retrospectiva',
+    tag: 'Facultad de Números',
+    duration: '1 año',
+    desc: 'Formación avanzada en «yo ya lo dije» y «esto se veía venir». Único programa donde los exámenes se corrigen después de saber las respuestas.',
+    salidas: 'Analista de mercados · Comentarista deportivo del lunes · Historiador de barra',
+  },
+];
+---
+
+<Layout
+  title="Másteres — Tolosa University"
+  description="Posgrados de Tolosa University: del Máster en Tertulianismo Profesional (opina de todo sin saber nada) al Máster en Silencio Estratégico. Excelencia opinativa desde antes de la IA."
+>
+  <PageHero
+    eyebrow="Posgrado"
+    title="Másteres para rematar la faena"
+    subtitle="Cuando el grado se queda corto, el posgrado de Tolosa University te lleva al siguiente nivel: opinar con criterio. O, en un caso muy concreto, sin él."
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Programa estrella</p>
+        <h2>Máster en Tertulianismo Profesional</h2>
+        <p>
+          El único programa de Tolosa University donde el conocimiento es opcional. Fórmate para
+          opinar de macroeconomía, geopolítica, virología y fichajes de invierno
+          <em>en la misma frase</em> y sin haber abierto un libro de ninguna de las cuatro cosas.
+        </p>
+      </div>
+
+      <article class="featured">
+        <div class="featured-main">
+          <p class="featured-claim">«No sé nada del tema, pero lo voy a decir muy alto.»</p>
+          <p>
+            Mientras el resto de la universidad se empeña en saber las cosas antes de decirlas,
+            este máster explora el camino inverso, avalado por décadas de televisión en horario de
+            máxima audiencia. Nuestro claustro sigue debatiendo si el programa es una genialidad o
+            una vergüenza institucional. El debate, cómo no, lo modera un alumno de segundo curso,
+            que ya opina mejor que todos ellos juntos.
+          </p>
+
+          <h3>Plan de estudios</h3>
+          <ul class="syllabus">
+            {asignaturas.map((a) => (
+              <li>
+                <span>{a.name}</span>
+                <span class="ects">{a.ects}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="fine-print">
+            * ECTS: Escala de Convicción Totalmente Subjetiva. La defensa del TFM es obligatoria;
+            su lectura, opcional.
+          </p>
+        </div>
+
+        <aside class="featured-side">
+          <h3>Ficha del programa</h3>
+          <dl>
+            <dt>Duración</dt>
+            <dd>1 año, que el alumno estirará hasta que le corten el micro.</dd>
+            <dt>Modalidad</dt>
+            <dd>Presencial. Un tertuliano sin público es solo alguien equivocado en voz baja.</dd>
+            <dt>Requisitos de acceso</dt>
+            <dd>
+              No se exige titulación previa. De hecho, acreditar conocimientos sobre el temario
+              puntúa negativamente.
+            </dd>
+            <dt>Criterio de evaluación</dt>
+            <dd>Se aprueba por convicción, no por acierto. Empatar un debate es suspender.</dd>
+            <dt>Salidas profesionales</dt>
+            <dd>Tertuliano de prime time · Opinólogo todoterreno · Cuñado con título oficial</dd>
+          </dl>
+          <a href="/admisiones/" class="btn btn-primary">Solicitar plaza (sin pensarlo)</a>
+        </aside>
+      </article>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Resto de la oferta</p>
+        <h2>Másteres para quienes prefieren saber antes de hablar</h2>
+        <p>
+          El itinerario tradicional de la casa: primero se estudia, luego se opina. Anticuado,
+          lo sabemos. Nos encanta.
+        </p>
+      </div>
+      <div class="grid grid-2">
+        {masters.map((m) => (
+          <article class="degree">
+            <div class="degree-head">
+              <span class="degree-tag">{m.tag}</span>
+              <span class="degree-dur">{m.duration}</span>
+            </div>
+            <h3>{m.name}</h3>
+            <p>{m.desc}</p>
+            <p class="degree-salidas"><strong>Salidas:</strong> {m.salidas}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--navy">
+    <div class="wrap center callout">
+      <h2>¿Dudas entre saber o parecer que sabes?</h2>
+      <p class="lead" style="color:#c3ccdb">
+        Nuestro equipo de admisiones te orientará. Y si no sabe la respuesta, te la dirá igualmente
+        con muchísima seguridad.
+      </p>
+      <a href="/admisiones/" class="btn btn-primary">Habla con admisiones</a>
+      <a href="/grados/" class="btn btn-ghost" style="margin-left:0.75rem">Ver los grados</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .featured {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .featured-main {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--gold);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+  .featured-main p {
+    color: var(--muted);
+  }
+  .featured-claim {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.35rem;
+    color: var(--navy) !important;
+    margin: 0 0 1rem;
+  }
+  .featured-main h3 {
+    margin: 1.8rem 0 1rem;
+    font-size: 1.2rem;
+  }
+
+  .syllabus {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .syllabus li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.6rem 0.9rem;
+    background: var(--cream);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    font-size: 0.95rem;
+  }
+  .ects {
+    white-space: nowrap;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--gold-deep);
+    letter-spacing: 0.06em;
+  }
+  .fine-print {
+    font-size: 0.82rem;
+    margin: 1rem 0 0;
+  }
+
+  .featured-side {
+    background: var(--navy);
+    color: #dfe4ee;
+    border-radius: 12px;
+    padding: 1.9rem;
+    position: sticky;
+    top: 6rem;
+  }
+  .featured-side h3 {
+    color: #fff;
+    margin: 0 0 1.1rem;
+    font-size: 1.15rem;
+  }
+  .featured-side dl {
+    margin: 0 0 1.5rem;
+  }
+  .featured-side dt {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-top: 1rem;
+  }
+  .featured-side dt:first-child {
+    margin-top: 0;
+  }
+  .featured-side dd {
+    margin: 0.25rem 0 0;
+    font-size: 0.93rem;
+    color: #c3ccdb;
+  }
+
+  .degree {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1.9rem;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .degree:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px rgba(20, 36, 63, 0.1);
+    border-color: var(--gold);
+  }
+  .degree-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+  }
+  .degree-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--gold-deep);
+  }
+  .degree-dur {
+    font-size: 0.8rem;
+    color: var(--muted);
+    background: var(--cream);
+    padding: 0.15rem 0.6rem;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .degree h3 {
+    margin: 0 0 0.7rem;
+    font-size: 1.3rem;
+  }
+  .degree p {
+    color: var(--muted);
+    margin: 0 0 0.9rem;
+  }
+  .degree-salidas {
+    font-size: 0.9rem;
+    padding-top: 0.7rem;
+    border-top: 1px dashed var(--line);
+  }
+  .degree-salidas strong {
+    color: var(--navy);
+  }
+
+  .callout .lead {
+    margin: 0.6rem auto 1.6rem;
+  }
+  .center {
+    text-align: center;
+  }
+
+  @media (max-width: 860px) {
+    .featured {
+      grid-template-columns: 1fr;
+    }
+    .featured-side {
+      position: static;
+    }
+  }
+</style>

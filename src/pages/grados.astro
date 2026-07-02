@@ -101,13 +101,22 @@ const masters = [
       <div class="section-head">
         <p class="eyebrow">Posgrado</p>
         <h2>Másteres oficiales</h2>
-        <p>Para quienes ya lo saben casi todo y quieren rematar la faena.</p>
+        <p>
+          Para quienes ya lo saben casi todo y quieren rematar la faena. Incluido uno, muy
+          concreto, para quienes prefieren saltarse el paso de saber.
+        </p>
       </div>
       <ul class="master-list">
+        <li class="master-star">
+          Máster en Tertulianismo Profesional — opina de todo sin saber nada
+        </li>
         {masters.map((m) => (
           <li>{m}</li>
         ))}
       </ul>
+      <p class="masters-cta">
+        <a href="/masteres/" class="btn btn-outline">Ver todos los másteres</a>
+      </p>
     </div>
   </section>
 
@@ -187,6 +196,14 @@ const masters = [
     padding: 1rem 1.25rem;
     font-weight: 600;
     color: var(--navy);
+  }
+  .master-list .master-star {
+    border-left-color: var(--navy);
+    background: var(--navy);
+    color: #fff;
+  }
+  .masters-cta {
+    margin: 1.5rem 0 0;
   }
 
   .callout .lead {
