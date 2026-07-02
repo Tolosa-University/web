@@ -33,3 +33,31 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # Avisa a los buscadores compatibles con IndexNow (Bing, Yandex, Seznam,
+  # Naver) de las URLs publicadas. La clave no es secreta: por protocolo
+  # debe estar publicada en /<clave>.txt para que el buscador la valide.
+  indexnow:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Submit sitemap URLs to IndexNow
+        run: |
+          HOST=tolosauniversity.com
+          KEY=a93d0f333c50e1a9e223da04573cdd57
+
+          # Margen para que el deploy de Pages propague y /<clave>.txt esté servido
+          sleep 30
+
+          URLS=$(curl -fsSL "https://$HOST/sitemap-index.xml" \
+            | grep -o '<loc>[^<]*</loc>' | sed 's|</\?loc>||g' \
+            | xargs -n1 curl -fsSL \
+            | grep -o '<loc>[^<]*</loc>' | sed 's|</\?loc>||g')
+
+          echo "Submitting $(echo "$URLS" | wc -l) URLs"
+          PAYLOAD=$(echo "$URLS" | jq -R . | jq -s --arg host "$HOST" --arg key "$KEY" \
+            '{host: $host, key: $key, urlList: .}')
+
+          curl -fsS -X POST 'https://api.indexnow.org/indexnow' \
+            -H 'Content-Type: application/json; charset=utf-8' \
+            -d "$PAYLOAD" -w 'HTTP %{http_code}\n'
