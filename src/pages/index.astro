@@ -1,18 +1,30 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import header from '../assets/tolosauniversity-header.jpeg';
 ---
 
 <Layout>
-  <div class="starter-template">
-    <img src="/img/tolosauniversity-header.jpeg" alt="Tolosa University" />
+  <div class="hero">
+    <Image src={header} alt="Tolosa University" loading="eager" fetchpriority="high" />
     <h1>2025 / 2026</h1>
     <p class="lead">La universidad de los que <i>to' losaben</i>.</p>
   </div>
 </Layout>
 
 <style>
-  .starter-template {
+  .hero {
     padding: 3rem 1.5rem;
     text-align: center;
+  }
+
+  .hero img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .lead {
+    font-size: 1.25rem;
+    font-weight: 300;
   }
 </style>

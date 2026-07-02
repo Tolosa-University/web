@@ -10,7 +10,7 @@ Web de [tolosauniversity.com](https://tolosauniversity.com), construida con [Ast
 
 ## Comandos
 
-Requiere Node 20.3+ o 22+ (con Homebrew: `export PATH="/opt/homebrew/opt/node/bin:$PATH"`).
+Requiere Node 22+ (fijado en `.tool-versions` para asdf).
 
 | Comando           | Acción                                        |
 | ----------------- | --------------------------------------------- |
