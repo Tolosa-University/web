@@ -1,0 +1,770 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const grados = [
+  'Grado en Cultura General Aplicada',
+  'Grado en Consulta Enciclopédica',
+  'Grado en Cálculo Mental Clásico',
+  'Grado en Orientación sin GPS',
+  'Grado en Retórica y Debate de Sobremesa',
+  'Grado en Memoria Prodigiosa',
+  'Grado en Historia Contada de Memoria',
+  'Grado en Bricolaje del Conocimiento',
+  'Máster en Saberlo Todo',
+  'Doctorado Honoris Causa en Sabiduría General',
+];
+---
+
+<Layout
+  title="Genera tu título — Tolosa University"
+  description="Crea y descarga gratis tu diploma honorífico de Tolosa University. Escribe tu nombre y tu grado y obtén un título universitario con pergamino, orla dorada y sellos."
+>
+  <Fragment slot="head">
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Playfair+Display:ital,wght@0,700;0,800;1,500;1,700&family=UnifrakturMaguntia&display=swap"
+      rel="stylesheet"
+    />
+  </Fragment>
+
+  <section class="gen-hero">
+    <div class="wrap">
+      <p class="page-eyebrow">Secretaría exprés</p>
+      <h1>Genera tu título de Tolosa University</h1>
+      <p class="page-sub">
+        Escribe tu nombre y el grado que mereces, y descárgate un diploma honorífico con toda
+        la solemnidad de la casa. Gratis, al instante y sin un solo examen.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap gen-grid">
+      <!-- FORM -->
+      <form class="gen-form" id="gen-form" autocomplete="off">
+        <div class="field">
+          <label for="f-name">Nombre completo</label>
+          <input type="text" id="f-name" maxlength="48" placeholder="Ej. María de los Saberes Etxeberria" value="María de los Saberes Etxeberria" />
+        </div>
+
+        <div class="field">
+          <label for="f-grade">Título o grado</label>
+          <input type="text" id="f-grade" list="grados" maxlength="70" placeholder="Ej. Grado en Cultura General Aplicada" value="Grado en Cultura General Aplicada" />
+          <datalist id="grados">
+            {grados.map((g) => <option value={g} />)}
+          </datalist>
+        </div>
+
+        <div class="field">
+          <label for="f-spec">Especialización <span class="opt">(opcional)</span></label>
+          <input type="text" id="f-spec" maxlength="60" placeholder="Ej. mención en Debate de Sobremesa" value="" />
+        </div>
+
+        <div class="field">
+          <label for="f-date">Fecha de expedición</label>
+          <input type="date" id="f-date" />
+        </div>
+
+        <div class="gen-actions">
+          <button type="button" id="btn-download" class="btn btn-primary">Descargar diploma (PNG)</button>
+          <button type="button" id="btn-random" class="btn btn-outline">Sorpréndeme</button>
+        </div>
+        <p class="gen-note">
+          El diploma se genera en tu navegador y no se envía a ningún sitio. Es un recuerdo
+          honorífico de una universidad ficticia: no tiene validez académica (pero sí muchísimo estilo).
+        </p>
+      </form>
+
+      <!-- PREVIEW -->
+      <div class="gen-preview">
+        <div class="canvas-frame">
+          <canvas id="diploma" width="2800" height="2000" role="img" aria-label="Vista previa del diploma"></canvas>
+        </div>
+        <p class="preview-hint">Vista previa en tiempo real · se descarga en alta resolución</p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .gen-hero {
+    background:
+      radial-gradient(circle at 85% 10%, rgba(193, 154, 75, 0.18), transparent 40%),
+      linear-gradient(155deg, #10203a 0%, #14243f 55%, #1d3255 100%);
+    color: #fff;
+    padding-block: 3.5rem;
+    border-bottom: 3px solid var(--gold);
+  }
+  .gen-hero .page-eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    font-weight: 600;
+    margin: 0 0 0.9rem;
+  }
+  .gen-hero h1 {
+    color: #fff;
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin: 0;
+  }
+  .gen-hero .page-sub {
+    color: #cdd6e4;
+    font-size: 1.12rem;
+    max-width: 46rem;
+    margin: 1.1rem 0 0;
+  }
+
+  .gen-grid {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .gen-form {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 1.75rem;
+    box-shadow: 0 12px 34px rgba(20, 36, 63, 0.06);
+    position: sticky;
+    top: 6rem;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.15rem;
+  }
+  .field label {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--navy);
+  }
+  .field .opt {
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .field input {
+    font: inherit;
+    padding: 0.65rem 0.8rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .field input:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(193, 154, 75, 0.18);
+  }
+  .gen-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-top: 0.5rem;
+  }
+  .gen-actions .btn {
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+  .gen-actions .btn-outline {
+    border-color: var(--navy);
+  }
+  .gen-note {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin: 1.1rem 0 0;
+    line-height: 1.5;
+  }
+
+  .gen-preview {
+    min-width: 0;
+  }
+  .canvas-frame {
+    background: linear-gradient(135deg, #6b4a2b, #4e3620);
+    padding: 1.1rem;
+    border-radius: 8px;
+    box-shadow: 0 22px 50px rgba(20, 36, 63, 0.28);
+  }
+  #diploma {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+  }
+  .preview-hint {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 0.9rem;
+    font-style: italic;
+  }
+
+  @media (max-width: 880px) {
+    .gen-grid {
+      grid-template-columns: 1fr;
+    }
+    .gen-form {
+      position: static;
+    }
+  }
+</style>
+
+<script>
+  const canvas = document.getElementById('diploma') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d')!;
+
+  const nameEl = document.getElementById('f-name') as HTMLInputElement;
+  const gradeEl = document.getElementById('f-grade') as HTMLInputElement;
+  const specEl = document.getElementById('f-spec') as HTMLInputElement;
+  const dateEl = document.getElementById('f-date') as HTMLInputElement;
+  const btnDownload = document.getElementById('btn-download') as HTMLButtonElement;
+  const btnRandom = document.getElementById('btn-random') as HTMLButtonElement;
+
+  // ---- Design constants (logical canvas units) ----
+  const W = 1400;
+  const H = 1000;
+  const SCALE = 2;
+
+  const NAVY = '#152743';
+  const INK = '#1c2a44';
+  const GOLD = '#b28e33';
+  const GOLD_D = '#8f6f24';
+  const GOLDL = '#c9a349';
+
+  const MESES = [
+    'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+    'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre',
+  ];
+
+  const GRADOS = [
+    'Grado en Cultura General Aplicada',
+    'Grado en Consulta Enciclopédica',
+    'Grado en Cálculo Mental Clásico',
+    'Grado en Orientación sin GPS',
+    'Grado en Retórica y Debate de Sobremesa',
+    'Grado en Memoria Prodigiosa',
+    'Grado en Historia Contada de Memoria',
+    'Grado en Bricolaje del Conocimiento',
+    'Máster en Saberlo Todo',
+    'Doctorado Honoris Causa en Sabiduría General',
+  ];
+  const NOMBRES = [
+    'Iñaki del Conocimiento Agirre',
+    'Amaia Todolosabe Urrutia',
+    'Kepa Enciclopedia Zubizarreta',
+    'Nerea de los Datos Etxeberria',
+    'Xabier Singps Larrañaga',
+  ];
+
+  const SIGS = [
+    { sign: 'E. Larrañaga', label: 'La Rectora' },
+    { sign: 'K. Eskulan', label: 'El Decano de la Facultad' },
+    { sign: 'C. Notaalpié', label: 'El Secretario General' },
+  ];
+
+  // ---- Helpers ----
+  function fitFont(text: string, maxWidth: number, make: (s: number) => string, start: number, min: number) {
+    let size = start;
+    while (size > min) {
+      ctx.font = make(size);
+      if (ctx.measureText(text).width <= maxWidth) break;
+      size -= 1;
+    }
+    ctx.font = make(size);
+    return size;
+  }
+
+  function drawSpaced(text: string, cx: number, y: number, spacing: number) {
+    const prev = ctx.textAlign;
+    ctx.textAlign = 'left';
+    const chars = [...text];
+    const widths = chars.map((c) => ctx.measureText(c).width);
+    let total = widths.reduce((a, b) => a + b + spacing, 0) - spacing;
+    let x = cx - total / 2;
+    for (let i = 0; i < chars.length; i++) {
+      ctx.fillText(chars[i], x, y);
+      x += widths[i] + spacing;
+    }
+    ctx.textAlign = prev;
+  }
+
+  function fmtDate(v: string) {
+    const d = v ? new Date(v + 'T00:00:00') : new Date();
+    const day = d.getDate();
+    return `${day} de ${MESES[d.getMonth()]} de ${d.getFullYear()}`;
+  }
+
+  // ---- Decorative pieces ----
+  function drawParchment() {
+    const g = ctx.createLinearGradient(0, 0, W, H);
+    g.addColorStop(0, '#fdf8ea');
+    g.addColorStop(0.5, '#f7edd3');
+    g.addColorStop(1, '#f0e3c2');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+
+    // aged blotches
+    for (let i = 0; i < 90; i++) {
+      const x = Math.random() * W;
+      const y = Math.random() * H;
+      const r = 2 + Math.random() * 5;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(150,110,50,${0.015 + Math.random() * 0.03})`;
+      ctx.fill();
+    }
+    // vignette
+    const vg = ctx.createRadialGradient(W / 2, H / 2, H * 0.3, W / 2, H / 2, H * 0.8);
+    vg.addColorStop(0, 'rgba(0,0,0,0)');
+    vg.addColorStop(1, 'rgba(90,60,20,0.14)');
+    ctx.fillStyle = vg;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  function drawBorder() {
+    // outer thick line
+    ctx.strokeStyle = GOLD;
+    ctx.lineWidth = 6;
+    rect(30, 30, W - 60, H - 60);
+    ctx.stroke();
+    // inner thin line
+    ctx.strokeStyle = GOLD_D;
+    ctx.lineWidth = 2;
+    rect(66, 66, W - 132, H - 132);
+    ctx.stroke();
+
+    // decorative diamond band between the two lines
+    ctx.fillStyle = GOLDL;
+    const inset = 48;
+    const step = 26;
+    const dsize = 4;
+    for (let x = inset + step; x < W - inset; x += step) {
+      diamond(x, inset, dsize);
+      diamond(x, H - inset, dsize);
+    }
+    for (let y = inset + step; y < H - inset; y += step) {
+      diamond(inset, y, dsize);
+      diamond(W - inset, y, dsize);
+    }
+    // corner flourishes
+    corner(30, 30, 1, 1);
+    corner(W - 30, 30, -1, 1);
+    corner(30, H - 30, 1, -1);
+    corner(W - 30, H - 30, -1, -1);
+  }
+
+  function rect(x: number, y: number, w: number, h: number) {
+    ctx.beginPath();
+    ctx.rect(x, y, w, h);
+  }
+
+  function diamond(x: number, y: number, s: number) {
+    ctx.beginPath();
+    ctx.moveTo(x, y - s);
+    ctx.lineTo(x + s, y);
+    ctx.lineTo(x, y + s);
+    ctx.lineTo(x - s, y);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  function corner(x: number, y: number, dx: number, dy: number) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.scale(dx, dy);
+    ctx.strokeStyle = GOLD_D;
+    ctx.lineWidth = 2.5;
+    // scroll
+    ctx.beginPath();
+    ctx.moveTo(14, 60);
+    ctx.bezierCurveTo(14, 30, 30, 14, 60, 14);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(22, 70);
+    ctx.bezierCurveTo(22, 40, 40, 22, 70, 22);
+    ctx.stroke();
+    // little leaf dot
+    ctx.fillStyle = GOLD;
+    ctx.beginPath();
+    ctx.arc(60, 14, 4, 0, Math.PI * 2);
+    ctx.arc(14, 60, 4, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  // ---- Crest ----
+  function drawLeaf(x: number, y: number, ang: number, len: number, wid: number) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(ang);
+    ctx.beginPath();
+    ctx.ellipse(len * 0.5, 0, len * 0.5, wid, 0, 0, Math.PI * 2);
+    ctx.fillStyle = GOLD;
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function quad(p0: number[], p1: number[], p2: number[], t: number) {
+    const mt = 1 - t;
+    return [
+      mt * mt * p0[0] + 2 * mt * t * p1[0] + t * t * p2[0],
+      mt * mt * p0[1] + 2 * mt * t * p1[1] + t * t * p2[1],
+    ];
+  }
+
+  function drawBranch(cx: number, cy: number, r: number, side: number) {
+    const p0 = [cx + side * 6, cy + r * 0.72];
+    const p1 = [cx + side * (r * 1.15), cy + r * 0.15];
+    const p2 = [cx + side * (r * 0.72), cy - r * 0.7];
+    ctx.strokeStyle = GOLD_D;
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(p0[0], p0[1]);
+    ctx.quadraticCurveTo(p1[0], p1[1], p2[0], p2[1]);
+    ctx.stroke();
+    const N = 7;
+    for (let i = 1; i <= N; i++) {
+      const t = i / (N + 1);
+      const pt = quad(p0, p1, p2, t);
+      const pt2 = quad(p0, p1, p2, Math.min(t + 0.02, 1));
+      const ang = Math.atan2(pt2[1] - pt[1], pt2[0] - pt[0]);
+      drawLeaf(pt[0], pt[1], ang + side * 1.0, 20, 7);
+      drawLeaf(pt[0], pt[1], ang - side * 0.2, 18, 6.5);
+    }
+  }
+
+  function drawCrown(cx: number, topY: number, w: number) {
+    ctx.fillStyle = GOLD;
+    const h = w * 0.62;
+    const baseY = topY + h;
+    // band
+    ctx.fillRect(cx - w / 2, baseY, w, h * 0.28);
+    // body
+    ctx.beginPath();
+    ctx.moveTo(cx - w / 2, baseY + 2);
+    ctx.lineTo(cx - w / 2, topY + h * 0.35);
+    ctx.lineTo(cx - w / 4, topY + h * 0.62);
+    ctx.lineTo(cx, topY);
+    ctx.lineTo(cx + w / 4, topY + h * 0.62);
+    ctx.lineTo(cx + w / 2, topY + h * 0.35);
+    ctx.lineTo(cx + w / 2, baseY + 2);
+    ctx.closePath();
+    ctx.fill();
+    // jewels on tips
+    for (const [jx, jy] of [
+      [cx - w / 2, topY + h * 0.3],
+      [cx, topY - w * 0.04],
+      [cx + w / 2, topY + h * 0.3],
+    ]) {
+      ctx.beginPath();
+      ctx.arc(jx, jy, w * 0.07, 0, Math.PI * 2);
+      ctx.fillStyle = GOLD;
+      ctx.fill();
+    }
+  }
+
+  function drawMonogram(cx: number, cy: number, r: number) {
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fillStyle = NAVY;
+    ctx.fill();
+    ctx.lineWidth = r * 0.07;
+    ctx.strokeStyle = GOLDL;
+    ctx.stroke();
+
+    const s = (2 * r) / 100;
+    const ox = cx - r;
+    const oy = cy - r;
+    const P = (x: number, y: number): [number, number] => [ox + x * s, oy + y * s];
+
+    // U (gold)
+    ctx.fillStyle = GOLDL;
+    ctx.beginPath();
+    let p = P(26, 34); ctx.moveTo(p[0], p[1]);
+    p = P(40, 34); ctx.lineTo(p[0], p[1]);
+    p = P(40, 58); ctx.lineTo(p[0], p[1]);
+    let c = P(40, 64), e = P(46, 64); ctx.quadraticCurveTo(c[0], c[1], e[0], e[1]);
+    p = P(54, 64); ctx.lineTo(p[0], p[1]);
+    c = P(60, 64); e = P(60, 58); ctx.quadraticCurveTo(c[0], c[1], e[0], e[1]);
+    p = P(60, 34); ctx.lineTo(p[0], p[1]);
+    p = P(74, 34); ctx.lineTo(p[0], p[1]);
+    p = P(74, 59); ctx.lineTo(p[0], p[1]);
+    c = P(74, 78); e = P(55, 78); ctx.quadraticCurveTo(c[0], c[1], e[0], e[1]);
+    p = P(45, 78); ctx.lineTo(p[0], p[1]);
+    c = P(26, 78); e = P(26, 59); ctx.quadraticCurveTo(c[0], c[1], e[0], e[1]);
+    ctx.closePath();
+    ctx.fill();
+
+    // T (white)
+    ctx.fillStyle = '#fff';
+    let a = P(30, 20), b = P(70, 31);
+    ctx.fillRect(a[0], a[1], b[0] - a[0], b[1] - a[1]);
+    a = P(44.5, 20); b = P(55.5, 54);
+    ctx.fillRect(a[0], a[1], b[0] - a[0], b[1] - a[1]);
+  }
+
+  function drawBanner(cx: number, cy: number, w: number, text: string) {
+    const h = 30;
+    const tw = 26;
+    ctx.fillStyle = NAVY;
+    // tails
+    ctx.beginPath();
+    ctx.moveTo(cx - w / 2, cy - h / 2);
+    ctx.lineTo(cx - w / 2 - tw, cy - h / 2 - 8);
+    ctx.lineTo(cx - w / 2 - tw + 8, cy);
+    ctx.lineTo(cx - w / 2 - tw, cy + h / 2 + 8);
+    ctx.lineTo(cx - w / 2, cy + h / 2);
+    ctx.closePath();
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(cx + w / 2, cy - h / 2);
+    ctx.lineTo(cx + w / 2 + tw, cy - h / 2 - 8);
+    ctx.lineTo(cx + w / 2 + tw - 8, cy);
+    ctx.lineTo(cx + w / 2 + tw, cy + h / 2 + 8);
+    ctx.lineTo(cx + w / 2, cy + h / 2);
+    ctx.closePath();
+    ctx.fill();
+    // main
+    ctx.fillRect(cx - w / 2, cy - h / 2, w, h);
+    // text
+    ctx.fillStyle = GOLDL;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.font = '600 15px "EB Garamond"';
+    drawSpaced(text.toUpperCase(), cx, cy + 1, 2.5);
+  }
+
+  function drawCrest(cx: number, cy: number) {
+    drawBranch(cx, cy, 78, -1);
+    drawBranch(cx, cy, 78, 1);
+    drawCrown(cx, cy - 92, 42);
+    drawMonogram(cx, cy - 6, 40);
+    drawBanner(cx, cy + 62, 92, 'In Wikipedia Veritas');
+  }
+
+  function drawSeal(cx: number, cy: number, r: number) {
+    ctx.save();
+    ctx.globalAlpha = 0.9;
+    ctx.strokeStyle = GOLD_D;
+    ctx.fillStyle = 'rgba(178,142,51,0.10)';
+    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill();
+    ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke();
+    ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.arc(cx, cy, r - 8, 0, Math.PI * 2); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx, cy, r - 12, 0, Math.PI * 2); ctx.stroke();
+    // ring text
+    ctx.fillStyle = GOLD_D;
+    ctx.font = '600 11px "EB Garamond"';
+    ringText('★ TOLOSA UNIVERSITY ★ IN WIKIPEDIA VERITAS ', cx, cy, r - 20);
+    // center monogram letters
+    ctx.fillStyle = GOLD_D;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.font = '700 30px "Playfair Display"';
+    ctx.fillText('TU', cx, cy + 1);
+    ctx.restore();
+  }
+
+  function ringText(text: string, cx: number, cy: number, radius: number) {
+    const chars = [...text];
+    const anglePer = (Math.PI * 2) / chars.length;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    for (let i = 0; i < chars.length; i++) {
+      const a = -Math.PI / 2 + i * anglePer;
+      ctx.save();
+      ctx.translate(cx + Math.cos(a) * radius, cy + Math.sin(a) * radius);
+      ctx.rotate(a + Math.PI / 2);
+      ctx.fillText(chars[i], 0, 0);
+      ctx.restore();
+    }
+  }
+
+  // ---- Main render ----
+  function render() {
+    const name = (nameEl.value || 'Nombre Apellido').trim();
+    const grade = (gradeEl.value || 'Grado en Saberlo Todo').trim();
+    const spec = specEl.value.trim();
+    const dateStr = fmtDate(dateEl.value);
+
+    ctx.setTransform(SCALE, 0, 0, SCALE, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    drawParchment();
+    drawBorder();
+
+    const cx = W / 2;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    // Crest
+    drawCrest(cx, 158);
+
+    // Est. Pre-AI
+    ctx.fillStyle = GOLD_D;
+    ctx.font = '600 13px "EB Garamond"';
+    drawSpaced('EST. PRE-AI', cx, 246, 3);
+
+    // University name (blackletter)
+    ctx.fillStyle = NAVY;
+    fitFont('Tolosa University', 1000, (s) => `400 ${s}px "UnifrakturMaguntia"`, 88, 50);
+    ctx.fillText('Tolosa University', cx, 312);
+
+    // subtitle
+    ctx.fillStyle = INK;
+    ctx.font = '700 26px "Playfair Display"';
+    drawSpaced('DIPLOMA DE TÍTULO UNIVERSITARIO', cx, 360, 2);
+
+    // divider
+    ctx.strokeStyle = GOLD;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(cx - 120, 384);
+    ctx.lineTo(cx + 120, 384);
+    ctx.stroke();
+    diamondStroke(cx, 384, 6);
+
+    // intro
+    ctx.fillStyle = INK;
+    ctx.font = 'italic 400 23px "EB Garamond"';
+    ctx.fillText('El Claustro de Profesores y el Consejo de Administración de la Tolosa University', cx, 424);
+    ctx.fillText('hacen constar y certifican que', cx, 454);
+
+    // NAME
+    ctx.fillStyle = NAVY;
+    fitFont(name, 1020, (s) => `italic 700 ${s}px "Playfair Display"`, 60, 30);
+    ctx.fillText(name, cx, 512);
+    // underline flourish
+    const nameW = Math.min(ctx.measureText(name).width, 1020);
+    ctx.strokeStyle = GOLD;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(cx - nameW / 2 - 20, 548);
+    ctx.lineTo(cx + nameW / 2 + 20, 548);
+    ctx.stroke();
+    diamondStroke(cx - nameW / 2 - 26, 548, 4);
+    diamondStroke(cx + nameW / 2 + 26, 548, 4);
+
+    // body
+    ctx.fillStyle = INK;
+    ctx.font = '400 22px "EB Garamond"';
+    ctx.fillText('ha cumplido satisfactoriamente con los requisitos académicos y exámenes', cx, 592);
+    ctx.fillText('establecidos, por lo que se le confiere solemnemente el grado de', cx, 620);
+
+    // GRADE
+    ctx.fillStyle = NAVY;
+    fitFont(grade, 1050, (s) => `700 ${s}px "Playfair Display"`, 40, 24);
+    ctx.fillText(grade, cx, 672);
+
+    // specialization
+    let dateY = 748;
+    if (spec) {
+      ctx.fillStyle = INK;
+      ctx.font = 'italic 500 22px "EB Garamond"';
+      const specText = /especializ|menci/i.test(spec) ? spec : `con especialización en ${spec}`;
+      fitFont(specText, 1000, (s) => `italic 500 ${s}px "EB Garamond"`, 22, 16);
+      ctx.fillText(specText, cx, 712);
+      dateY = 756;
+    }
+
+    // date / place
+    ctx.fillStyle = INK;
+    ctx.font = '400 21px "EB Garamond"';
+    ctx.fillText(`Dado en Donostia / San Sebastián, a ${dateStr}.`, cx, dateY);
+
+    // seal
+    drawSeal(250, 858, 66);
+
+    // signatures
+    const cols = [470, 700, 930];
+    SIGS.forEach((sig, i) => {
+      const x = cols[i];
+      ctx.fillStyle = INK;
+      ctx.font = '400 40px "Great Vibes"';
+      ctx.fillText(sig.sign, x, 862);
+      ctx.strokeStyle = '#8a7a5a';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(x - 95, 892);
+      ctx.lineTo(x + 95, 892);
+      ctx.stroke();
+      ctx.fillStyle = NAVY;
+      ctx.font = '600 13px "EB Garamond"';
+      drawSpaced(sig.label.toUpperCase(), x, 908, 1.5);
+    });
+  }
+
+  function diamondStroke(x: number, y: number, s: number) {
+    ctx.fillStyle = GOLD;
+    ctx.beginPath();
+    ctx.moveTo(x, y - s);
+    ctx.lineTo(x + s, y);
+    ctx.lineTo(x, y + s);
+    ctx.lineTo(x - s, y);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // ---- Wiring ----
+  function slug(s: string) {
+    return s
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '') || 'diploma';
+  }
+
+  btnDownload.addEventListener('click', () => {
+    render();
+    const link = document.createElement('a');
+    link.download = `Titulo-Tolosa-University-${slug(nameEl.value)}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+
+  btnRandom.addEventListener('click', () => {
+    nameEl.value = NOMBRES[Math.floor(Math.random() * NOMBRES.length)];
+    gradeEl.value = GRADOS[Math.floor(Math.random() * GRADOS.length)];
+    specEl.value = '';
+    render();
+  });
+
+  let t: number | undefined;
+  [nameEl, gradeEl, specEl, dateEl].forEach((el) => {
+    el.addEventListener('input', () => {
+      window.clearTimeout(t);
+      t = window.setTimeout(render, 120);
+    });
+  });
+
+  // default date = today
+  const now = new Date();
+  dateEl.value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+
+  async function init() {
+    const specs = [
+      '400 80px "UnifrakturMaguntia"',
+      '700 40px "Playfair Display"',
+      'italic 700 40px "Playfair Display"',
+      '400 24px "EB Garamond"',
+      '600 24px "EB Garamond"',
+      'italic 400 24px "EB Garamond"',
+      'italic 500 24px "EB Garamond"',
+      '400 40px "Great Vibes"',
+    ];
+    try {
+      await Promise.all(specs.map((s) => document.fonts.load(s)));
+      await document.fonts.ready;
+    } catch (e) {
+      /* fonts may still load; render anyway */
+    }
+    render();
+  }
+
+  init();
+</script>

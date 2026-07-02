@@ -8,6 +8,7 @@ const nav = [
   { href: '/investigacion/', label: 'Investigación' },
   { href: '/servicios/', label: 'Servicios' },
   { href: '/nosotros/', label: 'Nosotros' },
+  { href: '/generador/', label: 'Genera tu título' },
 ];
 
 // Ruta actual normalizada para marcar el enlace activo.
@@ -98,7 +99,7 @@ const isActive = (href: string) => {
   .nav {
     display: flex;
     align-items: center;
-    gap: 1.35rem;
+    gap: 1.05rem;
   }
 
   .nav-link {
@@ -169,7 +170,7 @@ const isActive = (href: string) => {
     transition: transform 0.2s ease, opacity 0.2s ease;
   }
 
-  @media (max-width: 860px) {
+  @media (max-width: 980px) {
     .burger {
       display: flex;
     }

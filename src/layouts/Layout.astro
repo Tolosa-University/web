@@ -74,6 +74,8 @@ const jsonLd = {
       rel="stylesheet"
     />
 
+    <slot name="head" />
+
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
     <!-- Google tag (gtag.js) -->
