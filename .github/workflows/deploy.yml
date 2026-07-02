@@ -10,6 +10,13 @@ permissions:
   pages: write
   id-token: write
 
+# Queue deployments instead of failing when one is already in progress.
+# Don't cancel in-progress runs: a half-finished Pages deployment can't be
+# safely interrupted, so let it complete and deploy the latest one after.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
