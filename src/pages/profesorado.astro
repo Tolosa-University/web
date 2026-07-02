@@ -82,6 +82,24 @@ const faculty = [
     </div>
   </section>
 
+  <section class="section claustro-band">
+    <div class="wrap">
+      <figure class="claustro-figure">
+        <img
+          src="/img/claustro.jpg"
+          alt="El claustro de profesores de Tolosa University reunido con toga y birrete en la lonja de pescado"
+          width="1400"
+          height="763"
+          loading="lazy"
+        />
+        <figcaption>
+          El claustro deliberando en su sala de juntas habitual: la lonja de Tolosa,
+          donde el conocimiento se sirve fresco del día.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
   <section class="section section--cream">
     <div class="wrap center join">
       <p class="eyebrow">Trabaja con nosotros</p>
@@ -139,6 +157,27 @@ const faculty = [
     margin: 0;
     color: var(--muted);
     font-size: 0.96rem;
+  }
+  .claustro-band {
+    padding-block: 0 3rem;
+  }
+  .claustro-figure {
+    margin: 0;
+  }
+  .claustro-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border-bottom: 4px solid var(--gold);
+    box-shadow: 0 18px 40px rgba(20, 36, 63, 0.18);
+  }
+  .claustro-figure figcaption {
+    margin-top: 0.8rem;
+    font-size: 0.88rem;
+    font-style: italic;
+    color: var(--muted);
+    text-align: center;
   }
   .center {
     text-align: center;
