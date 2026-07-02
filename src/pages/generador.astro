@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import '../styles/fonts-diploma.css';
 
 const grados = [
   'Grado en Cultura General Aplicada',
@@ -33,13 +34,6 @@ const generadorSchema = {
   description="Crea y descarga gratis tu diploma honorífico de Tolosa University. Escribe tu nombre y tu grado y obtén un título universitario con pergamino, orla dorada y sellos."
   schema={generadorSchema}
 >
-  <Fragment slot="head">
-    <link
-      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Playfair+Display:ital,wght@0,700;0,800;1,500;1,700&family=UnifrakturMaguntia&display=swap"
-      rel="stylesheet"
-    />
-  </Fragment>
-
   <section class="gen-hero">
     <div class="wrap">
       <p class="page-eyebrow">Secretaría exprés</p>
