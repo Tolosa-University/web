@@ -1,13 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
-import { grados } from '../data/oferta';
-
-// En el select basta el nombre corto, sin el «Grado en» delante.
-const opcionesGrado = grados.map((g) => g.name.replace(/^Grado en /, ''));
 
 const pasos = [
-  { n: '1', title: 'Solicitud', text: 'Rellena el formulario. A mano, si te apetece, aunque aceptamos teclado.' },
+  { n: '1', title: 'Solicitud', text: 'Escríbenos a info@tolosauniversity.com. A mano, si te apetece, aunque aceptamos teclado.' },
   { n: '2', title: 'Prueba de saberes', text: 'Una conversación distendida donde demuestras curiosidad. No hay tipo test: hay charla.' },
   { n: '3', title: 'Entrevista', text: 'Nos cuentas qué te gustaría saber y por qué. Las respuestas correctas nos importan menos que las buenas preguntas.' },
   { n: '4', title: 'Matrícula', text: 'Bienvenido a la última generación que lo sabrá todo por sí misma.' },
@@ -90,50 +86,15 @@ const calendario = [
     </div>
   </section>
 
-  <!-- FORMULARIO -->
+  <!-- CTA GENERADOR -->
   <section class="section">
-    <div class="wrap form-wrap">
+    <div class="wrap center">
       <div class="section-head center">
-        <p class="eyebrow">Formulario de solicitud</p>
-        <h2>Empieza aquí tu candidatura</h2>
-        <p>Rellena tus datos y nos pondremos en contacto para la charla. Sin compromiso y sin robots de por medio.</p>
+        <p class="eyebrow">¿Con prisa?</p>
+        <h2>Tu título, sin esperar al proceso</h2>
+        <p>Mientras llega tu carta de admisión, genera tu propio diploma de Tolosa University.</p>
       </div>
-
-      <form class="apply-form" name="solicitud" onsubmit="return false;">
-        <div class="row">
-          <label>
-            Nombre y apellidos
-            <input type="text" name="nombre" placeholder="Tu nombre completo" required />
-          </label>
-          <label>
-            Correo electrónico
-            <input type="email" name="email" placeholder="tu@correo.com" required />
-          </label>
-        </div>
-        <div class="row">
-          <label>
-            Grado de interés
-            <select name="grado">
-              {opcionesGrado.map((o) => <option>{o}</option>)}
-              <option>Aún no lo sé (¡nos encanta!)</option>
-            </select>
-          </label>
-          <label>
-            Teléfono
-            <input type="tel" name="telefono" placeholder="Opcional" />
-          </label>
-        </div>
-        <label>
-          ¿Qué te gustaría saber que aún no sabes?
-          <textarea name="motivacion" rows="4" placeholder="Cuéntanoslo con tus propias palabras."></textarea>
-        </label>
-        <button type="submit" class="btn btn-primary">Enviar solicitud</button>
-        <p class="form-note">
-          Este formulario es una demostración de una universidad ficticia: no envía datos a ningún
-          sitio. Para consultas reales, escríbenos a
-          <a href="mailto:info@tolosauniversity.com">info@tolosauniversity.com</a>.
-        </p>
-      </form>
+      <a href="/generador/" class="btn btn-primary">Genera tu título</a>
     </div>
   </section>
 </Layout>
@@ -217,71 +178,9 @@ const calendario = [
     margin-top: 1rem;
   }
 
-  .form-wrap {
-    max-width: 46rem;
-  }
-  .apply-form {
-    display: grid;
-    gap: 1.2rem;
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 2.2rem;
-    box-shadow: 0 12px 34px rgba(20, 36, 63, 0.06);
-  }
-  .apply-form .row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.2rem;
-  }
-  .apply-form label {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    font-weight: 600;
-    font-size: 0.92rem;
-    color: var(--navy);
-  }
-  .apply-form input,
-  .apply-form select,
-  .apply-form textarea {
-    font: inherit;
-    font-weight: 400;
-    padding: 0.7rem 0.85rem;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    background: var(--paper);
-    color: var(--ink);
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
-  }
-  .apply-form input:focus,
-  .apply-form select:focus,
-  .apply-form textarea:focus {
-    outline: none;
-    border-color: var(--gold);
-    box-shadow: 0 0 0 3px rgba(193, 154, 75, 0.18);
-  }
-  .apply-form textarea {
-    resize: vertical;
-  }
-  .apply-form button {
-    justify-self: start;
-    border: 0;
-    cursor: pointer;
-  }
-  .form-note {
-    font-size: 0.85rem;
-    color: var(--muted);
-    margin: 0;
-  }
-
   @media (max-width: 720px) {
-    .two-col,
-    .apply-form .row {
-      grid-template-columns: 1fr;
-      gap: 1.2rem;
-    }
     .two-col {
+      grid-template-columns: 1fr;
       gap: 2.5rem;
     }
   }
