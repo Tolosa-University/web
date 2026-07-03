@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
+import { linkWikipedia } from '../utils/wikipedia';
 
 const servicios = [
   {
@@ -62,7 +63,7 @@ const servicios = [
         {servicios.map((s) => (
           <article id={s.id} class="card service">
             <h3>{s.title}</h3>
-            <p>{s.desc}</p>
+            <p set:html={linkWikipedia(s.desc)} />
           </article>
         ))}
       </div>

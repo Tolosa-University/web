@@ -1,5 +1,6 @@
 ---
 import type { Programa } from '../data/oferta';
+import { linkWikipedia } from '../utils/wikipedia';
 
 type Props = Programa;
 const { name, tag, duration, desc, salidas } = Astro.props;
@@ -11,7 +12,7 @@ const { name, tag, duration, desc, salidas } = Astro.props;
     <span class="degree-dur">{duration}</span>
   </div>
   <h3>{name}</h3>
-  <p>{desc}</p>
+  <p set:html={linkWikipedia(desc)} />
   <p class="degree-salidas"><strong>Salidas:</strong> {salidas}</p>
 </article>
 

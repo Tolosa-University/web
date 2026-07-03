@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import crest from '../assets/logo.png';
+import { linkWikipedia } from '../utils/wikipedia';
 
 const stats = [
   { n: '1', label: 'Fuente de la verdad', sub: 'Wikipedia' },
@@ -54,7 +55,7 @@ const featured = [
           <div class="stat">
             <span class="stat-n">{s.n}</span>
             <span class="stat-label">{s.label}</span>
-            <span class="stat-sub">{s.sub}</span>
+            <span class="stat-sub" set:html={linkWikipedia(s.sub)} />
           </div>
         ))}
       </div>

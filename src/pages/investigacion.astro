@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
+import { linkWikipedia } from '../utils/wikipedia';
 
 const lineas = [
   {
@@ -65,7 +66,7 @@ const papers = [
         {lineas.map((l) => (
           <article class="card">
             <h3>{l.title}</h3>
-            <p>{l.desc}</p>
+            <p set:html={linkWikipedia(l.desc)} />
           </article>
         ))}
       </div>
