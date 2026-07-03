@@ -3,6 +3,35 @@ import Layout from '../layouts/Layout.astro';
 import { titulosDiploma } from '../data/oferta';
 import '../styles/fonts-diploma.css';
 
+const comoFunciona = [
+  { n: '1', title: 'Escribe tu nombre', text: 'Tal y como quieres verlo en el pergamino. Con segundo apellido queda más solemne.' },
+  { n: '2', title: 'Elige tu grado', text: 'Selecciona un título oficial de la casa o invéntate el que llevas años ejerciendo sin acreditar.' },
+  { n: '3', title: 'Descarga tu diploma', text: 'Un PNG en alta resolución con escudo, orla dorada y sellos. Listo para imprimir y enmarcar.' },
+];
+
+const faqs = [
+  {
+    q: '¿Cuánto cuesta generar un título universitario?',
+    a: 'Nada. El generador de títulos es gratuito, sin registro y sin letra pequeña. En Tolosa creemos que presumir de saberlo todo no debería costar dinero.',
+  },
+  {
+    q: '¿El diploma tiene validez académica?',
+    a: 'No. Es un diploma honorífico de una universidad ficticia, pensado como broma, recuerdo o regalo. Eso sí: el pergamino, la orla dorada y los sellos tienen una solemnidad muy seria.',
+  },
+  {
+    q: '¿Qué hacéis con mis datos?',
+    a: 'Absolutamente nada. El diploma se dibuja por completo en tu navegador y no se envía a ningún servidor: ni tu nombre ni tu grado salen de tu pantalla.',
+  },
+  {
+    q: '¿En qué formato se descarga el diploma?',
+    a: 'En imagen PNG de alta resolución (2800 × 2000 píxeles), lista para imprimir, enmarcar o mandar al grupo familiar con total dignidad.',
+  },
+  {
+    q: '¿Puedo regalar un título a otra persona?',
+    a: 'Por supuesto. Es el regalo perfecto para quien opina de todo: pon su nombre, elige el «Máster en Tertulia y Opinión Deportiva» y por fin tendrá su mérito acreditado.',
+  },
+];
+
 const generadorSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
@@ -10,17 +39,36 @@ const generadorSchema = {
   url: new URL('/generador/', Astro.site).href,
   applicationCategory: 'DesignApplication',
   operatingSystem: 'Web',
+  inLanguage: 'es',
+  isAccessibleForFree: true,
+  browserRequirements: 'Requiere JavaScript',
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+  featureList: [
+    'Diploma personalizado con nombre, grado y especialización',
+    'Vista previa en tiempo real',
+    'Descarga en PNG de alta resolución (2800 × 2000)',
+    'Sin registro y sin envío de datos: todo ocurre en el navegador',
+  ],
   description:
     'Herramienta gratuita para crear y descargar un diploma honorífico personalizado de Tolosa University con pergamino, orla dorada y sellos.',
   provider: { '@id': new URL('/#organization', Astro.site).href },
 };
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 
 <Layout
-  title="Genera tu título universitario gratis — Tolosa University"
-  description="Crea y descarga gratis tu diploma honorífico de Tolosa University. Escribe tu nombre y tu grado y obtén un título universitario con pergamino, orla dorada y sellos."
-  schema={generadorSchema}
+  title="Generador de títulos universitarios gratis — Tolosa University"
+  description="Crea y descarga gratis tu diploma universitario personalizado con el generador de títulos de Tolosa University: pergamino, orla dorada y sellos, en PNG de alta resolución y sin registro."
+  schema={[generadorSchema, faqSchema]}
 >
   <section class="gen-hero">
     <div class="wrap">
@@ -76,6 +124,44 @@ const generadorSchema = {
           <canvas id="diploma" width="2800" height="2000" role="img" aria-label="Vista previa del diploma"></canvas>
         </div>
         <p class="preview-hint">Vista previa en tiempo real · se descarga en alta resolución</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÓMO FUNCIONA -->
+  <section class="section section--cream">
+    <div class="wrap">
+      <div class="section-head center">
+        <p class="eyebrow">Cómo funciona</p>
+        <h2>Tu título universitario en tres pasos</h2>
+        <p>Sin exámenes, sin tasas y sin esperar a la ceremonia de graduación.</p>
+      </div>
+      <div class="grid grid-3">
+        {comoFunciona.map((p) => (
+          <div class="gen-step">
+            <span class="gen-step-n">{p.n}</span>
+            <h3>{p.title}</h3>
+            <p>{p.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="wrap faq-wrap">
+      <div class="section-head center">
+        <p class="eyebrow">Preguntas frecuentes</p>
+        <h2>Lo que todo el mundo pregunta sobre el generador de títulos</h2>
+      </div>
+      <div class="faq-list">
+        {faqs.map((f) => (
+          <div class="faq-item">
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -195,6 +281,57 @@ const generadorSchema = {
     color: var(--muted);
     margin-top: 0.9rem;
     font-style: italic;
+  }
+
+  .gen-step {
+    text-align: center;
+    padding: 1.5rem 1rem;
+  }
+  .gen-step-n {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--gold-light);
+    font-family: var(--font-serif);
+    font-weight: 800;
+    font-size: 1.35rem;
+    border: 2px solid var(--gold);
+  }
+  .gen-step h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.15rem;
+  }
+  .gen-step p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.94rem;
+  }
+
+  .faq-wrap {
+    max-width: 46rem;
+  }
+  .faq-list {
+    display: grid;
+    gap: 1rem;
+  }
+  .faq-item {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.4rem 1.6rem;
+  }
+  .faq-item h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+  }
+  .faq-item p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.97rem;
   }
 
   @media (max-width: 880px) {
