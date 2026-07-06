@@ -9,7 +9,6 @@ const nav = [
   { href: '/investigacion/', label: 'Investigación' },
   { href: '/servicios/', label: 'Servicios' },
   { href: '/nosotros/', label: 'Nosotros' },
-  { href: '/generador/', label: 'Genera tu título' },
 ];
 
 // Ruta actual normalizada para marcar el enlace activo.
@@ -202,7 +201,8 @@ const isActive = (href: string) => {
     }
 
     .site-header.nav-open .nav {
-      max-height: 30rem;
+      max-height: calc(100dvh - 4.5rem);
+      overflow-y: auto;
       visibility: visible;
     }
 
@@ -212,8 +212,11 @@ const isActive = (href: string) => {
     }
 
     .btn-apply {
-      margin-top: 1rem;
+      display: block;
+      margin-top: 1.25rem;
+      padding: 0.85rem 1.05rem;
       text-align: center;
+      font-size: 1rem;
     }
 
     .site-header.nav-open .burger span:nth-child(1) {
